@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import dotenv from 'dotenv'
 import ConnectDB from "./config/db.js"
 
@@ -12,10 +12,10 @@ ConnectDB()
 app.use(express.json())
 
 //temp syntax to ensure database is working
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.send('Oh wow, your server is up and running. Ready to make something beautiful?')
 })
 
 app.listen(PORT, () => {
-  console.log(`server is up and running on http://localhost:${PORT}`)
+  console.log(`Server is up and running on http://localhost:${PORT}`)
 })
