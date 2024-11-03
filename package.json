@@ -1,0 +1,32 @@
+{
+  "name": "timetracker2",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node server/server.js", 
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server/server.js",
+    "build": "cd client && npm run build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "client": "npm --prefix client run dev"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "concurrently": "^9.0.1",
+    "eslint": "^9.13.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^15.11.0",
+    "vite": "^5.4.10"
+  }
+}
