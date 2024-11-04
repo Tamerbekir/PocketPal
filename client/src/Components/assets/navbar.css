@@ -37,3 +37,27 @@ nav a:hover {
   font-size: 20.5px;
 }
 
+/* for theme toggle */
+body.light {
+  background-color: #ffffff9e;
+  color: #333;
+}
+
+body.dark {
+  background-color: #121212e7;
+  color: #ffffff;
+}
+
+
+.theme {
+  padding: 10px;
+  font-size: 20px;
+  text-decoration: none;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin: 3px;
+  background-color: rgba(75, 3, 75, 0.693);
+  color: white;
+}
+
+

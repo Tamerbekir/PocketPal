@@ -8,13 +8,12 @@ type Query {
 type User {
   id: ID!
   name: String!
-  password: String!
   activities: [Activity!]!
 }
 
 type Activity {
   id: ID!
-  activityName: String!
-  activityValue: Int!
+  name: String!
+  value: Int!
   user: User!
 }
