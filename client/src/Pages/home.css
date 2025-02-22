@@ -1,0 +1,64 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 10px;
+  background-color: #8f66c438;
+  border-radius: 10px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-family: 'Arial', sans-serif;
+}
+
+.accordion .accordion-header {
+  font-size: 1.2rem;
+}
+
+.btn-add {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #3c4d47;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  background-color: #32413c4b(84, 216, 176, 0.74);
+}
+
+.btn-delete {
+  display: block;
+  width: 25%;
+  padding: 5px;
+  margin-top: 10px;
+  font-size: 10px;
+  background-color: #961a0c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b;
+}
+
+.info-item {
+  background-color: #222c2e3a;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 30px;
+  color: #2c3e50;
+  font-family: 'Arial', sans-serif;
+}

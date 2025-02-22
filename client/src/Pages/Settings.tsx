@@ -1,82 +1,71 @@
-import { useState } from "react";
-import "../assets/settings.css";
 import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { ChangeHandler, useState } from "react";
+import "./settings.css";
 
-export default function Settings() {
-  const [changePassWord, setChangePassword] = useState(false);
-  const [changeName, setChangeName] = useState(false);
+const Settings = () => {
+  interface UserInfo {
+    name: string;
+    email: string;
+  }
+
+  const [userInfo, setChangeUserInfo] = useState<UserInfo>({
+    name: "",
+    email: "",
+  });
+
+  const [toggleSettings, setToggleSettings] = useState<boolean>(false);
+
+  const handleSettingsChange = () => {
+    setToggleSettings(!toggleSettings);
+  };
+
+  const handleUserInfoChange = (event: ChangeHandler<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setChangeUserInfo({ ...userInfo, [name]: value });
+  };
 
   return (
     <div>
-      {!changeName ? (
-        <>
-          <Form.Label htmlFor="inputName">Username</Form.Label>
-          <Form.Control type="text" id="inputName" />
-          <Button
-            onClick={() => setChangeName(true)}
-            style={{ backgroundColor: "grey", border: "none" }}
-          >
-            Change Username
-          </Button>
-        </>
-      ) : (
-        <>
-          <Form.Label htmlFor="inputName">New Username</Form.Label>
-          <Form.Control type="text" id="inputNameChange" />
-          <br />
+      <h1 className="settingsHeader">Settings</h1>
+      <div className="settingsContainer">
+        {toggleSettings ? (
           <>
-            <Button
-              onClick={() => setChangeName(false)}
-              style={{ backgroundColor: "grey", border: "none" }}
-            >
-              Save
-            </Button>
+            <p>{!userInfo.name ? "No Name" : <p>Name: {userInfo.name}</p>}</p>
+            <p>
+              {!userInfo.email ? "No Email" : <p>Email: {userInfo.email}</p>}
+            </p>
           </>
-        </>
-      )}
-      {!changePassWord ? (
-        <>
+        ) : (
           <>
-            <br />
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              id="currentPassword"
-              aria-describedby="passwordHelpBlock"
-            />
+            <Form.Label htmlFor="basic-url">Name</Form.Label>
+            <InputGroup className="mb-3 settingsInput">
+              <Form.Control
+                id="basic-url"
+                aria-describedby="basic-addon3"
+                onChange={handleUserInfoChange}
+                value={userInfo.name}
+                name="name"
+              />
+            </InputGroup>
+            <Form.Label htmlFor="basic-url">Email</Form.Label>
+            <InputGroup className="mb-3 settingsInput">
+              <Form.Control
+                id="basic-url"
+                aria-describedby="basic-addon3"
+                onChange={handleUserInfoChange}
+                value={userInfo.email}
+                name="email"
+              />
+            </InputGroup>
           </>
-          <Button
-            onClick={() => setChangePassword(true)}
-            style={{ backgroundColor: "grey", border: "none" }}
-          >
-            Change Password
-          </Button>
-        </>
-      ) : (
-        <>
-          <br />
-          <Form.Label>New Password</Form.Label>
-          <Form.Control
-            type="password"
-            id="newPassword"
-            aria-describedby="passwordHelpBlock"
-          />
-          <Form.Label> Confirm New Password</Form.Label>
-          <Form.Control
-            type="password"
-            id="confirmNewPassword"
-            aria-describedby="passwordHelpBlock"
-          />
-          <Button
-            onClick={() => setChangePassword(false)}
-            style={{ backgroundColor: "grey", border: "none" }}
-          >
-            Save
-          </Button>
-        </>
-      )}
+        )}
+        <Button onClick={handleSettingsChange}>
+          {!toggleSettings ? "Save" : "Change"}
+        </Button>
+      </div>
     </div>
   );
-}
+};
+export default Settings;
