@@ -4,8 +4,9 @@ import ConnectDB from "./config/db.js"
 
 //apollo server, graphql
 import {ApolloServer} from 'apollo-server-express'
-import {resolvers} from './graphql/resolvers'
+import { userResolver } from './graphql/resolvers/userResolvers';
 import { typeDefs } from './graphql/typeDefs/typeDef.js'
+
 
 //brining in token
 import { verifyToken } from './utils/generateToken.js'
@@ -22,7 +23,7 @@ app.use(express.json())
 
 const apolloServer = new ApolloServer({
   typeDefs,
-  resolvers,
+  userResolver,
   context: ({ req }) => {
     const token = req.headers.authorization || ''
     const decoded = verifyToken(token.replace('Bearer ', ''))

@@ -3,9 +3,9 @@ import { gql } from 'apollo-server';
 export const typeDefs = gql`
   type Query {
     getUser(id: ID!): User
-    getActivity(id: ID!): Activity
+    # getActivity(id: ID!): Activity
     getAllUsers: [User!]!
-    getAllActivities: [Activity!]!
+    # getAllActivities: [Activity!]!
   }
 
   type User {
@@ -15,12 +15,6 @@ export const typeDefs = gql`
     activities: [Activity!]!
   }
 
-  type Activity {
-    id: ID!
-    name: String!
-    value: Int!
-    user: User!
-  }
 
   type AuthUser {
     user: User
@@ -28,8 +22,8 @@ export const typeDefs = gql`
   }
   
   type Mutation {
-    createUser(username: String!, password: String!): User
-    createActivity(name: String!, value: Int!, userId: ID!): Activity
-    login(username: String!, password: String!): AuthUser
-  }
+  createUser(username: String!, password: String!): AuthUser
+  login(username: String!, password: String!): AuthUser
+}
+
   `

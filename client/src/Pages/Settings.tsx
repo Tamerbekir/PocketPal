@@ -1,17 +1,23 @@
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-import { ChangeHandler, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import "../assets/settings.css";
+import { stringify } from "querystring";
 const Settings = () => {
   interface UserInfo {
     name: string;
     email: string;
   }
 
-  const [userInfo, setChangeUserInfo] = useState<UserInfo>({
-    name: "",
-    email: "",
+  const [userInfo, setUserInfo] = useState<UserInfo>(() => {
+    const saveInfo = localStorage.getItem("userInfo");
+    return saveInfo
+      ? JSON.parse(saveInfo)
+      : {
+          name: "",
+          email: "",
+        };
   });
 
   const [toggleSettings, setToggleSettings] = useState<boolean>(false);
@@ -20,16 +26,35 @@ const Settings = () => {
     setToggleSettings(!toggleSettings);
   };
 
-  const handleUserInfoChange = (event: ChangeHandler<HTMLInputElement>) => {
+  const handleUserInfoChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setChangeUserInfo({ ...userInfo, [name]: value });
+
+    // Updates the user's name or email in state as they type.
+    // Also updates local storage immediately to persist changes across refreshes.
+    setUserInfo((currentUserInfo) => {
+      const updateUserInfo = { ...currentUserInfo, [name]: value };
+      localStorage.setItem("userInfo", JSON.stringify(updateUserInfo));
+      return updateUserInfo;
+    });
   };
+
+  useEffect(() => {
+    localStorage.setItem("userInfo", JSON.stringify(userInfo));
+  }, [userInfo]);
+
+  useEffect(() => {
+    const storedSettings = localStorage.getItem("userInfo");
+
+    if (storedSettings) {
+      setUserInfo(JSON.parse(storedSettings));
+    }
+  }, []);
 
   return (
     <div>
       <h1 className="settingsHeader">Settings</h1>
       <div className="settingsContainer">
-        {toggleSettings ? (
+        {!toggleSettings ? (
           <>
             <p>{!userInfo.name ? "No Name" : <p>Name: {userInfo.name}</p>}</p>
             <p>
@@ -61,7 +86,7 @@ const Settings = () => {
           </>
         )}
         <Button onClick={handleSettingsChange}>
-          {!toggleSettings ? "Save" : "Change"}
+          {!toggleSettings ? "Change" : "Save"}
         </Button>
       </div>
     </div>
