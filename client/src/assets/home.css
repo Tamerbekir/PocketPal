@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: auto;
   padding: 10px;
-  background-color: #8f66c438;
+  /* background-color: #8f66c438; */
   border-radius: 10px;
 }
 
@@ -15,6 +15,11 @@
 
 .accordion .accordion-header {
   font-size: 1.2rem;
+}
+
+.userCalenderDiv {
+  margin: 5%;
+  width: auto;
 }
 
 .btn-add {

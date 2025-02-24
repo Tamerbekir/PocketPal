@@ -2,8 +2,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import { ChangeHandler, useState } from "react";
-import "./settings.css";
-
+import "../assets/settings.css";
 const Settings = () => {
   interface UserInfo {
     name: string;

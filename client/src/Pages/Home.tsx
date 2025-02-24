@@ -2,82 +2,91 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Accordion from "react-bootstrap/Accordion";
-import "./home.css";
+import "../assets/home.css";
+import UserCalendar from "../Components/UserCalendar";
 
 interface UserInfo {
-  vacation: string;
-  sick: string;
-  fMal: string;
-  optionalHoliday: string;
-  other: string;
+  vacation: number;
+  sick: number;
+  fmal: number;
+  optionalHoliday: number;
+  other: number;
 }
 
 interface UserInfoUpdated {
-  vacationUpdated: string;
-  dateVacationUsed: string;
+  vacationUpdated: number;
+  dateVacationUsed: number;
   vacationDescription: string;
-  sickUpdated: string;
-  dateSickUpdated: string;
+  sickUpdated: number;
+  dateSickUpdated: number;
   sickDescription: string;
-  fMalUpdated: string;
-  dateFmalUpdated: string;
-  fMalDescription: string;
-  optionalHolidayUpdated: string;
-  dateOptionalHolidayUpdated: string;
+  fmalUpdated: number;
+  dateFmalUpdated: number;
+  fmalDescription: string;
+  optionalHolidayUpdated: number;
+  dateOptionalHolidayUpdated: number;
   optionalHolidayDescription: string;
-  otherUpdated: string;
-  dateOtherUpdated: string;
+  otherUpdated: number;
+  dateOtherUpdated: number;
   otherDescription: string;
 }
 
 const Home: React.FC = () => {
   const [userInfo, setUserInfo] = useState<UserInfo>({
-    vacation: "",
-    sick: "",
-    optionalHoliday: "",
-    fMal: "",
-    other: "",
+    vacation: 0,
+    sick: 0,
+    optionalHoliday: 0,
+    fmal: 0,
+    other: 0,
   });
   const [userInfoUpdated, setUserInfoUpdated] = useState<UserInfoUpdated>({
-    vacationUpdated: "",
-    dateVacationUsed: "",
+    vacationUpdated: 0,
+    dateVacationUsed: 0,
     vacationDescription: "",
-    sickUpdated: "",
-    dateSickUpdated: "",
+    sickUpdated: 0,
+    dateSickUpdated: 0,
     sickDescription: "",
-    fMalUpdated: "",
-    dateFmalUpdated: "",
-    fMalDescription: "",
-    optionalHolidayUpdated: "",
-    dateOptionalHolidayUpdated: "",
+    fmalUpdated: 0,
+    dateFmalUpdated: 0,
+    fmalDescription: "",
+    optionalHolidayUpdated: 0,
+    dateOptionalHolidayUpdated: 0,
     optionalHolidayDescription: "",
-    otherUpdated: "",
-    dateOtherUpdated: "",
+    otherUpdated: 0,
+    dateOtherUpdated: 0,
     otherDescription: "",
   });
+
   const [addVacationInfo, setAddVacationInfo] = useState<UserInfoUpdated[]>([]);
   const [addSickInfo, setAddSickInfo] = useState<UserInfoUpdated[]>([]);
   const [addFmalInfo, setAddFmalInfo] = useState<UserInfoUpdated[]>([]);
   const [addOptionalHolidayInfo, setAddOptionalHolidayInfo] = useState<
     UserInfoUpdated[]
   >([]);
+
   const [addOtherInfo, setAddOtherInfo] = useState<UserInfoUpdated[]>([]);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    setState: React.Dispatch<React.SetStateAction<any>>
+    // Passing `setState` function to handle changes for fields related to the UserInfoUpdated state
+    setState: React.Dispatch<React.SetStateAction<UserInfoUpdated>>
   ) => {
     const { name, value } = event.target;
-    setState((prevState: any) => ({
-      ...prevState,
+
+    // Update the state by spreading the current state and updating the specific field based on the input name
+    setState((currentUseState: any) => ({
+      ...currentUseState,
       [name]:
+        // If the name of the field includes "Updated" and doesn't include "date", treat the value as a number.
+        // Otherwise, treat it as a string (default behavior for most form fields)
         name.includes("Updated") && !name.includes("date")
-          ? Number(value)
-          : value,
+          ? Number(value) // Convert value to number if "Updated" and not "date"
+          : value, // Otherwise, keep the value as a string
     }));
   };
 
   const handleAddVacationInfo = () => {
+    // If any vacation fields are missing, stop and show an alert.
     if (
       !userInfo.vacation ||
       !userInfoUpdated.vacationUpdated ||
@@ -86,28 +95,36 @@ const Home: React.FC = () => {
       alert("Not added. Missing Information.");
       return;
     }
-    setAddVacationInfo((prevInfo) => [...prevInfo, userInfoUpdated]);
-    setUserInfo((prevInfo) => ({
-      ...prevInfo,
-      vacation: (
-        Number(prevInfo.vacation) - Number(userInfoUpdated.vacationUpdated)
-      ).toString(),
+
+    // Adding the new vacation info by spreading out the current vacation info
+    setAddVacationInfo((currentVacationInfo) => [
+      ...currentVacationInfo, // Keeps all existing vacation info from array
+      userInfoUpdated, // Adds the new vacation entry to the array
+    ]);
+
+    // Updating the vacation balance/value in userInfo
+    setUserInfo((currentUserInfo) => ({
+      ...currentUserInfo, // Spreading out all user info so nothing else changes
+      vacation:
+        Number(currentUserInfo.vacation) - // Taking the current vacation balance
+        Number(userInfoUpdated.vacationUpdated), // Subtracting the newly used vacation time
     }));
+    //Clearing all the use states once submitted
     setUserInfoUpdated({
-      vacationUpdated: "",
-      dateVacationUsed: "",
+      vacationUpdated: 0,
+      dateVacationUsed: 0,
       vacationDescription: "",
-      sickUpdated: "",
-      dateSickUpdated: "",
+      sickUpdated: 0,
+      dateSickUpdated: 0,
       sickDescription: "",
-      fMalUpdated: "",
-      dateFmalUpdated: "",
-      fMalDescription: "",
-      optionalHolidayUpdated: "",
-      dateOptionalHolidayUpdated: "",
+      fmalUpdated: 0,
+      dateFmalUpdated: 0,
+      fmalDescription: "",
+      optionalHolidayUpdated: 0,
+      dateOptionalHolidayUpdated: 0,
       optionalHolidayDescription: "",
-      otherUpdated: "",
-      dateOtherUpdated: "",
+      otherUpdated: 0,
+      dateOtherUpdated: 0,
       otherDescription: "",
     });
   };
@@ -122,64 +139,60 @@ const Home: React.FC = () => {
       alert("Not added. Missing Information.");
       return;
     }
-    setAddSickInfo((prevInfo) => [...prevInfo, userInfoUpdated]);
-    setUserInfo((prevInfo) => ({
-      ...prevInfo,
-      sick: (
-        Number(prevInfo.sick) - Number(userInfoUpdated.sickUpdated)
-      ).toString(),
+    setAddSickInfo((currentSickInfo) => [...currentSickInfo, userInfoUpdated]);
+    setUserInfo((currentUserInfo) => ({
+      ...currentUserInfo,
+      sick: Number(currentUserInfo.sick) - Number(userInfoUpdated.sickUpdated),
     }));
     setUserInfoUpdated({
-      vacationUpdated: "",
-      dateVacationUsed: "",
+      vacationUpdated: 0,
+      dateVacationUsed: 0,
       vacationDescription: "",
-      sickUpdated: "",
-      dateSickUpdated: "",
+      sickUpdated: 0,
+      dateSickUpdated: 0,
       sickDescription: "",
-      fMalUpdated: "",
-      dateFmalUpdated: "",
-      fMalDescription: "",
-      optionalHolidayUpdated: "",
-      dateOptionalHolidayUpdated: "",
+      fmalUpdated: 0,
+      dateFmalUpdated: 0,
+      fmalDescription: "",
+      optionalHolidayUpdated: 0,
+      dateOptionalHolidayUpdated: 0,
       optionalHolidayDescription: "",
-      otherUpdated: "",
-      dateOtherUpdated: "",
+      otherUpdated: 0,
+      dateOtherUpdated: 0,
       otherDescription: "",
     });
   };
 
   const handleAddFmalInfo = () => {
     if (
-      !userInfo.fMal ||
-      !userInfoUpdated.fMalUpdated ||
+      !userInfo.fmal ||
+      !userInfoUpdated.fmalUpdated ||
       !userInfoUpdated.dateFmalUpdated ||
-      !userInfoUpdated.fMalDescription
+      !userInfoUpdated.fmalDescription
     ) {
       alert("Not added. Missing Information.");
       return;
     }
-    setAddFmalInfo((prevInfo) => [...prevInfo, userInfoUpdated]);
-    setUserInfo((prevInfo) => ({
-      ...prevInfo,
-      fMal: (
-        Number(prevInfo.fMal) - Number(userInfoUpdated.fMalUpdated)
-      ).toString(),
+    setAddFmalInfo((currentFmalInfo) => [...currentFmalInfo, userInfoUpdated]);
+    setUserInfo((currentUserInfo) => ({
+      ...currentUserInfo,
+      fmal: Number(currentUserInfo.fmal) - Number(userInfoUpdated.fmalUpdated),
     }));
     setUserInfoUpdated({
-      vacationUpdated: "",
-      dateVacationUsed: "",
+      vacationUpdated: 0,
+      dateVacationUsed: 0,
       vacationDescription: "",
-      sickUpdated: "",
-      dateSickUpdated: "",
+      sickUpdated: 0,
+      dateSickUpdated: 0,
       sickDescription: "",
-      fMalUpdated: "",
-      dateFmalUpdated: "",
-      fMalDescription: "",
-      optionalHolidayUpdated: "",
-      dateOptionalHolidayUpdated: "",
+      fmalUpdated: 0,
+      dateFmalUpdated: 0,
+      fmalDescription: "",
+      optionalHolidayUpdated: 0,
+      dateOptionalHolidayUpdated: 0,
       optionalHolidayDescription: "",
-      otherUpdated: "",
-      dateOtherUpdated: "",
+      otherUpdated: 0,
+      dateOtherUpdated: 0,
       otherDescription: "",
     });
   };
@@ -194,29 +207,31 @@ const Home: React.FC = () => {
       alert("Not added. Missing Information.");
       return;
     }
-    setAddOptionalHolidayInfo((prevInfo) => [...prevInfo, userInfoUpdated]);
-    setUserInfo((prevInfo) => ({
-      ...prevInfo,
-      optionalHoliday: (
-        Number(prevInfo.optionalHoliday) -
-        Number(userInfoUpdated.optionalHolidayUpdated)
-      ).toString(),
+    setAddOptionalHolidayInfo((currentOptionalHolidayInfo) => [
+      ...currentOptionalHolidayInfo,
+      userInfoUpdated,
+    ]);
+    setUserInfo((currentUserInfo) => ({
+      ...currentUserInfo,
+      optionalHoliday:
+        currentUserInfo.optionalHoliday -
+        userInfoUpdated.optionalHolidayUpdated,
     }));
     setUserInfoUpdated({
-      vacationUpdated: "",
-      dateVacationUsed: "",
+      vacationUpdated: 0,
+      dateVacationUsed: 0,
       vacationDescription: "",
-      sickUpdated: "",
-      dateSickUpdated: "",
+      sickUpdated: 0,
+      dateSickUpdated: 0,
       sickDescription: "",
-      fMalUpdated: "",
-      dateFmalUpdated: "",
-      fMalDescription: "",
-      optionalHolidayUpdated: "",
-      dateOptionalHolidayUpdated: "",
+      fmalUpdated: 0,
+      dateFmalUpdated: 0,
+      fmalDescription: "",
+      optionalHolidayUpdated: 0,
+      dateOptionalHolidayUpdated: 0,
       optionalHolidayDescription: "",
-      otherUpdated: "",
-      dateOtherUpdated: "",
+      otherUpdated: 0,
+      dateOtherUpdated: 0,
       otherDescription: "",
     });
   };
@@ -231,88 +246,101 @@ const Home: React.FC = () => {
       alert("Not added. Missing Information.");
       return;
     }
-    setAddOtherInfo((prevInfo) => [...prevInfo, userInfoUpdated]);
-    setUserInfo((prevInfo) => ({
-      ...prevInfo,
-      other: (
-        Number(prevInfo.other) - Number(userInfoUpdated.otherUpdated)
-      ).toString(),
+    setAddOtherInfo((currentOtherInfo) => [
+      ...currentOtherInfo,
+      userInfoUpdated,
+    ]);
+    setUserInfo((currentOtherInfo) => ({
+      ...currentOtherInfo,
+      other:
+        Number(currentOtherInfo.other) - Number(userInfoUpdated.otherUpdated),
     }));
     setUserInfoUpdated({
-      vacationUpdated: "",
-      dateVacationUsed: "",
+      vacationUpdated: 0,
+      dateVacationUsed: 0,
       vacationDescription: "",
-      sickUpdated: "",
-      dateSickUpdated: "",
+      sickUpdated: 0,
+      dateSickUpdated: 0,
       sickDescription: "",
-      fMalUpdated: "",
-      dateFmalUpdated: "",
-      fMalDescription: "",
-      optionalHolidayUpdated: "",
-      dateOptionalHolidayUpdated: "",
+      fmalUpdated: 0,
+      dateFmalUpdated: 0,
+      fmalDescription: "",
+      optionalHolidayUpdated: 0,
+      dateOptionalHolidayUpdated: 0,
       optionalHolidayDescription: "",
-      otherUpdated: "",
-      dateOtherUpdated: "",
+      otherUpdated: 0,
+      dateOtherUpdated: 0,
       otherDescription: "",
     });
   };
 
   const handleDeleteVacationInfo = (index: number) => {
-    const infoToDelete = addVacationInfo[index];
-    setAddVacationInfo((prevInfo) => prevInfo.filter((_, i) => i !== index));
-    setUserInfo((prevInfo) => ({
-      ...prevInfo,
-      vacation: (
-        Number(prevInfo.vacation) + Number(infoToDelete.vacationUpdated)
-      ).toString(),
-    }));
-  };
+    setAddVacationInfo((currentVacationInfo) => {
+      // Making a copy of the vacation info array so we don’t modify state directly
+      const newInfo = [...currentVacationInfo];
 
-  const handleDeleteSickInfo = (index: number) => {
-    const infoToDelete = addSickInfo[index];
-    setAddSickInfo((prevInfo) => prevInfo.filter((_, i) => i !== index));
-    setUserInfo((prevInfo) => ({
-      ...prevInfo,
-      sick: (
-        Number(prevInfo.sick) + Number(infoToDelete.sickUpdated)
-      ).toString(),
-    }));
+      // Removing 1 item at the specified index from the array
+      const infoToDelete = newInfo.splice(index, 1)[0];
+      // `splice(index, 1)` removes the item and returns an array with the removed item.
+      // `[0]` grabs the first (and only) item from that array so we can work with the actual value instead of an array (because it is a number()). This deleted item is stored in the userInfo array and is used to determine the updated value.
+
+      // Updating user info by changing the vacation value
+      setUserInfo((currentUserInfo) => ({
+        ...currentUserInfo, // Keeping all existing user info
+        vacation:
+          Number(currentUserInfo.vacation) + // Convert current vacation value to a number so we can use it mathematically
+          Number(infoToDelete.vacationUpdated), // Add the removed vacation value (also convert to a number)
+        // Making sure we’re working with numbers to avoid weird string issues
+      }));
+
+      // Returning the updated vacation array without the deleted item
+      return newInfo;
+    });
   };
 
   const handleDeleteFmalInfo = (index: number) => {
-    const infoToDelete = addFmalInfo[index];
-    setAddFmalInfo((prevInfo) => prevInfo.filter((_, i) => i !== index));
-    setUserInfo((prevInfo) => ({
-      ...prevInfo,
-      fMal: (
-        Number(prevInfo.fMal) + Number(infoToDelete.fMalUpdated)
-      ).toString(),
-    }));
+    setAddFmalInfo((currentFmalInfo) => {
+      const newInfo = [...currentFmalInfo];
+      const infoToDelete = newInfo.splice(index, 1)[0];
+
+      setUserInfo((currentUserInfo) => ({
+        ...currentUserInfo,
+        fmal: Number(currentUserInfo.fmal) + Number(infoToDelete.fmalUpdated),
+      }));
+
+      return newInfo;
+    });
   };
 
   const handleDeleteOptionalHolidayInfo = (index: number) => {
-    const infoToDelete = addOptionalHolidayInfo[index];
-    setAddOptionalHolidayInfo((prevInfo) =>
-      prevInfo.filter((_, i) => i !== index)
-    );
-    setUserInfo((prevInfo) => ({
-      ...prevInfo,
-      optionalHoliday: (
-        Number(prevInfo.optionalHoliday) +
-        Number(infoToDelete.optionalHolidayUpdated)
-      ).toString(),
-    }));
+    setAddOptionalHolidayInfo((currentOptionalHolidayInfo) => {
+      const newInfo = [...currentOptionalHolidayInfo];
+      const infoToDelete = currentOptionalHolidayInfo.splice(index, 1)[0];
+
+      setUserInfo((currentUserInfo) => ({
+        ...currentUserInfo,
+        optionalHoliday:
+          Number(currentUserInfo.optionalHoliday) +
+          Number(infoToDelete.optionalHolidayUpdated),
+      }));
+
+      return newInfo;
+    });
   };
 
   const handleDeleteOtherInfo = (index: number) => {
-    const infoToDelete = addOtherInfo[index];
-    setAddOtherInfo((prevInfo) => prevInfo.filter((_, i) => i !== index));
-    setUserInfo((prevInfo) => ({
-      ...prevInfo,
-      other: (
-        Number(prevInfo.other) + Number(infoToDelete.otherUpdated)
-      ).toString(),
-    }));
+    setAddOtherInfo((currentOtherInfo) => {
+      const newInfo = [...currentOtherInfo];
+      const infoToDelete = currentOtherInfo.splice(index, 1)[0];
+
+      setUserInfo((currentUserInfo) => ({
+        ...currentUserInfo,
+        other:
+          Number(currentUserInfo.other) + Number(infoToDelete.otherUpdated),
+      }));
+
+      return newInfo;
+    });
   };
 
   useEffect(() => {
@@ -472,33 +500,33 @@ const Home: React.FC = () => {
         </Accordion.Item>
 
         <Accordion.Item eventKey="2">
-          <Accordion.Header>FMAL</Accordion.Header>
+          <Accordion.Header>fmal</Accordion.Header>
           <Accordion.Body>
             <InputGroup className="mb-3">
-              <InputGroup.Text>FMAL Hours</InputGroup.Text>
+              <InputGroup.Text>fmal Hours</InputGroup.Text>
               <Form.Control
                 type="number"
-                placeholder="FMAL"
+                placeholder="fmal"
                 onChange={(e) => handleChange(e, setUserInfo)}
-                value={userInfo.fMal}
-                name="fMal"
+                value={userInfo.fmal}
+                name="fmal"
               />
             </InputGroup>
             <InputGroup className="mb-3">
-              <InputGroup.Text>FMAL Hours Used</InputGroup.Text>
+              <InputGroup.Text>fmal Hours Used</InputGroup.Text>
               <Form.Control
                 type="number"
-                placeholder="FMAL Hours Used"
+                placeholder="fmal Hours Used"
                 onChange={(e) => handleChange(e, setUserInfoUpdated)}
-                value={userInfoUpdated.fMalUpdated}
-                name="fMalUpdated"
+                value={userInfoUpdated.fmalUpdated}
+                name="fmalUpdated"
               />
             </InputGroup>
             <InputGroup className="mb-3">
-              <InputGroup.Text>Date FMAL Used</InputGroup.Text>
+              <InputGroup.Text>Date fmal Used</InputGroup.Text>
               <Form.Control
                 type="date"
-                placeholder="Date FMAL Used"
+                placeholder="Date fmal Used"
                 onChange={(e) => handleChange(e, setUserInfoUpdated)}
                 value={userInfoUpdated.dateFmalUpdated}
                 name="dateFmalUpdated"
@@ -510,19 +538,19 @@ const Home: React.FC = () => {
                 type="text"
                 placeholder="Description"
                 onChange={(e) => handleChange(e, setUserInfoUpdated)}
-                value={userInfoUpdated.fMalDescription}
-                name="fMalDescription"
+                value={userInfoUpdated.fmalDescription}
+                name="fmalDescription"
               />
             </InputGroup>
             <button className="btn-add" onClick={handleAddFmalInfo}>
-              Add FMAL Time
+              Add fmal Time
             </button>
             <div>
               {addFmalInfo.map((info, index) => (
                 <div key={index} className="info-item">
-                  <p>FMAL Hours Used: {info.fMalUpdated}</p>
-                  <p>Date FMAL Used: {info.dateFmalUpdated}</p>
-                  <p>Description: {info.fMalDescription}</p>
+                  <p>fmal Hours Used: {info.fmalUpdated}</p>
+                  <p>Date fmal Used: {info.dateFmalUpdated}</p>
+                  <p>Description: {info.fmalDescription}</p>
                   <button
                     className="btn-delete"
                     onClick={() => handleDeleteFmalInfo(index)}
@@ -532,7 +560,7 @@ const Home: React.FC = () => {
                 </div>
               ))}
               <div>
-                <p>Hours Remaining: {userInfo.fMal}</p>
+                <p>Hours Remaining: {userInfo.fmal}</p>
               </div>
             </div>
           </Accordion.Body>
@@ -677,6 +705,9 @@ const Home: React.FC = () => {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
+      <div className="userCalenderDiv">
+        <UserCalendar />
+      </div>
     </div>
   );
 };

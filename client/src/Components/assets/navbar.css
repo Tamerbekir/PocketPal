@@ -48,6 +48,12 @@ body.dark {
   color: #ffffff;
 }
 
+.navDiv {
+  text-align: center;
+  display: flex;
+  
+}
+
 
 .theme {
   padding: 10px;
