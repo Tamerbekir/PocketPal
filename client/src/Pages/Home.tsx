@@ -62,12 +62,24 @@ const Home: React.FC = () => {
   };
 
   const handleAddLogActivityInfo = () => {
-    setAddActivityInfo([...addActivityInfo, userInfoUpdated]);
+    setAddActivityInfo((currentActivityInfo) => [
+      ...currentActivityInfo,
+      userInfoUpdated
+    ])
+    setUserInfo((currentUserInfo) => ({
+      ...currentUserInfo,
+      startingTime: Number(userInfo.startingTime) - Number(userInfoUpdated.usedTime)
+    }))
+    setUserInfoUpdated({
+      usedTime: 0,
+      description: '',
+      date: ''
+    })
   };
 
-  const toggleSettingsChange = () => {
-    setToggleSettings(!toggleSettings);
-  };
+  // const toggleSettingsChange = () => {
+  //   setToggleSettings(!toggleSettings);
+  // };
 
   return (
     <div className="container">
@@ -95,17 +107,15 @@ const Home: React.FC = () => {
                 ) : (
                   <>
                     {!userInfoUpdated.usedTime ? (
-                      <p>
-                        {activity.activity} - {activity.startingTime} Hours
-                      </p>
+                      <>
+                      <h3>{activity.activity}</h3>
+                      <div>
+                        <p>Starting Hours: {activity.startingTime}</p>
+                      </div>
+                      </>
                     ) : (
                       ""
                     )}
-                    {/* {!toggleSettings && (
-                      <button onClick={() => setToggleSettings(true)}>
-                        Edit
-                      </button>
-                    )} */}
                     {toggleSettings ? (
                       <>
                         <InputGroup className="mb-3">
@@ -134,35 +144,32 @@ const Home: React.FC = () => {
                             setToggleSettings(false);
                           }}
                         >
-                          Enter Info
+                          Log time
                         </button>
                       </>
                     ) : (
-                      <p>
-                        {userInfoUpdated.usedTime ||
-                        userInfoUpdated.description ? (
-                          <p>
-                            {activity.activity} -
-                            {Number(activity.startingTime) -
-                              Number(userInfoUpdated.usedTime)}{" "}
-                            Hours Remaining - {userInfoUpdated.description}
-                          </p>
-                        ) : (
-                          ""
-                        )}
-                        {!toggleSettings && (
-                          <button onClick={() => setToggleSettings(true)}>
-                            Update Info
-                          </button>
-                        )}
-                      </p>
+                      <div>
+                        {addActivityInfo.map((info, index) => (
+                          <div key={index}>
+                            <>
+                              <p>Hours Used: {info.usedTime} </p>
+                              <p>Description: {info.description}</p>
+                              </>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {!toggleSettings && (
+                      <button onClick={() => setToggleSettings(true)}>
+                        Update Info
+                      </button>
                     )}
                   </>
                 )}
                 {!activity.startingTime || !activity.startingTime ? (
                   <>
                     <InputGroup className="mb-3">
-                      <InputGroup.Text>Dedicated Time</InputGroup.Text>
+                      <InputGroup.Text>Hours Remaining</InputGroup.Text>
                       <Form.Control
                         type="number"
                         placeholder="Time"

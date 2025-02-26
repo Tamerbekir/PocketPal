@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "tsx server/server.ts", 
+    "start": "tsx server/server.ts",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon --watch server --exec \"tsx\" server/server.ts",
     "build": "cd client && npm run build",
@@ -13,8 +13,12 @@
     "client": "npm --prefix client run dev"
   },
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-bootstrap": "^2.10.9",
+    "react-calendar": "^5.1.0",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
