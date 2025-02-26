@@ -3,7 +3,6 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import { ChangeEvent, useEffect, useState } from "react";
 import "../assets/settings.css";
-import { stringify } from "querystring";
 const Settings = () => {
   interface UserInfo {
     name: string;
@@ -24,6 +23,12 @@ const Settings = () => {
 
   const handleSettingsChange = () => {
     setToggleSettings(!toggleSettings);
+    //once the user hits save btn it will log the data in local storage
+    setUserInfo((currentUserInfo) => {
+      const updateUserInfo = { ...currentUserInfo };
+      localStorage.setItem("userInfo", JSON.stringify(updateUserInfo));
+      return updateUserInfo;
+    });
   };
 
   const handleUserInfoChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -31,16 +36,8 @@ const Settings = () => {
 
     // Updates the user's name or email in state as they type.
     // Also updates local storage immediately to persist changes across refreshes.
-    setUserInfo((currentUserInfo) => {
-      const updateUserInfo = { ...currentUserInfo, [name]: value };
-      localStorage.setItem("userInfo", JSON.stringify(updateUserInfo));
-      return updateUserInfo;
-    });
+    setUserInfo({ ...userInfo, [name]: value });
   };
-
-  useEffect(() => {
-    localStorage.setItem("userInfo", JSON.stringify(userInfo));
-  }, [userInfo]);
 
   useEffect(() => {
     const storedSettings = localStorage.getItem("userInfo");
@@ -92,4 +89,5 @@ const Settings = () => {
     </div>
   );
 };
+
 export default Settings;
