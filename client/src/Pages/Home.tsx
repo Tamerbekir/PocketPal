@@ -96,7 +96,18 @@ const Home: React.FC = () => {
                 name="activity"
               />
             </InputGroup>
-
+            {userInfo.activity && (
+            <InputGroup className="mb-3">
+              <InputGroup.Text>Hours Remaining</InputGroup.Text>
+              <Form.Control
+                type="number"
+                placeholder="Time"
+                onChange={handleChangeActivityInfo}
+                value={userInfo.startingTime}
+                name="startingTime"
+              />
+            </InputGroup>
+            )}
             <button className="btn-add" onClick={handleAddActivity}>
               Add Activity
             </button>
@@ -168,16 +179,6 @@ const Home: React.FC = () => {
                 )}
                 {!activity.startingTime || !activity.startingTime ? (
                   <>
-                    <InputGroup className="mb-3">
-                      <InputGroup.Text>Hours Remaining</InputGroup.Text>
-                      <Form.Control
-                        type="number"
-                        placeholder="Time"
-                        onChange={handleChangeActivityInfo}
-                        value={userInfo.startingTime}
-                        name="startingTime"
-                      />
-                    </InputGroup>
                     {!toggleSettings && !activity.activity && (
                       <button onClick={handleAddActivityInfo}>
                         Enter Time
