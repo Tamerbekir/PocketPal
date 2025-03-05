@@ -110,10 +110,33 @@ const Home: React.FC = () => {
       [activityId]: [...(currentActivityLogs[activityId] || []), entry],
     }));
 
-    setLogEntry((prev) => ({
-      ...prev,
+    setLogEntry((currentLoggedEntries) => ({
+      ...currentLoggedEntries,
       [activityId]: { usedTime: 0, date: "", description: "" },
     }));
+  };
+
+  // deleting activity from array and return array without item spliced
+  const handleDeleteActivity = (index: number) => {
+    setActivities((currentActivities) => {
+      const currentActivitiesArray = [...currentActivities];
+      currentActivitiesArray.splice(index, 1)[0];
+      return currentActivitiesArray;
+    });
+  };
+
+  // deleting the activity based on key (date) as well as its position in the array
+  const handleDeleteActivityInfo = (activityId: number, index: number) => {
+    setActivityLogs((currentLogs) => {
+      const updatedLogs = { ...currentLogs };
+      // Because we are deleting from an object, an if statement is needed
+      //copy array over
+      updatedLogs[activityId] = [...updatedLogs[activityId]];
+      // then proceed to delete from array
+      updatedLogs[activityId].splice(index, 1)[0];
+
+      return updatedLogs;
+    });
   };
 
   return (
@@ -149,7 +172,7 @@ const Home: React.FC = () => {
           </Accordion.Body>
         </Accordion.Item>
 
-        {activities.map((activity) => (
+        {activities.map((activity, index) => (
           <Accordion.Item eventKey={activity.id.toString()} key={activity.id}>
             <Accordion.Header>
               {activity.activity} - {activity.startingTime} hours left
@@ -193,11 +216,30 @@ const Home: React.FC = () => {
               <h5 className="mt-3">Logged Entries</h5>
               <ListGroup>
                 {(activityLogs[activity.id] || []).map((log, index) => (
-                  <ListGroup.Item key={index}>
-                    {log.date} - {log.usedTime} hrs - {log.description}
-                  </ListGroup.Item>
+                  <>
+                    <ListGroup.Item key={index}>
+                      {log.date} - {log.usedTime} hrs - {log.description}
+                    </ListGroup.Item>
+                    <>
+                      <Button
+                        variant="danger"
+                        onClick={() =>
+                          handleDeleteActivityInfo(activity.id, index)
+                        }
+                      >
+                        Delete Entry
+                      </Button>
+                    </>
+                  </>
                 ))}
               </ListGroup>
+              <Button
+                className="deleteActivityBtn"
+                variant="danger"
+                onClick={() => handleDeleteActivity(index)}
+              >
+                Delete {activity.activity}
+              </Button>
             </Accordion.Body>
           </Accordion.Item>
         ))}

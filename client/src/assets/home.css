@@ -51,6 +51,10 @@
   cursor: pointer;
 }
 
+.deleteActivityBtn {
+  margin: 5%;
+}
+
 .btn-delete:hover {
   background-color: #c0392b;
 }
