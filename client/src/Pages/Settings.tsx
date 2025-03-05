@@ -6,7 +6,7 @@ import "../assets/settings.css";
 const Settings = () => {
   interface UserInfo {
     name: string;
-    email: string;
+    notes: string;
   }
 
   const [userInfo, setUserInfo] = useState<UserInfo>(() => {
@@ -15,7 +15,7 @@ const Settings = () => {
       ? JSON.parse(saveInfo)
       : {
           name: "",
-          email: "",
+          notes: "",
         };
   });
 
@@ -34,7 +34,7 @@ const Settings = () => {
   const handleUserInfoChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
-    // Updates the user's name or email in state as they type.
+    // Updates the user's name or notes in state as they type.
     // Also updates local storage immediately to persist changes across refreshes.
     setUserInfo({ ...userInfo, [name]: value });
   };
@@ -53,14 +53,14 @@ const Settings = () => {
       <div className="settingsContainer">
         {!toggleSettings ? (
           <>
-            <p>{!userInfo.name ? "No Name" : <p>Name: {userInfo.name}</p>}</p>
+            {/* <p>{!userInfo.name ? "No Name" : <p>Name: {userInfo.name}</p>}</p> */}
             <p>
-              {!userInfo.email ? "No Email" : <p>Email: {userInfo.email}</p>}
+              {!userInfo.notes ? "No notes" : <p>Notes: {userInfo.notes}</p>}
             </p>
           </>
         ) : (
           <>
-            <Form.Label htmlFor="basic-url">Name</Form.Label>
+            {/* <Form.Label htmlFor="basic-url">Name</Form.Label>
             <InputGroup className="mb-3 settingsInput">
               <Form.Control
                 id="basic-url"
@@ -69,17 +69,19 @@ const Settings = () => {
                 value={userInfo.name}
                 name="name"
               />
-            </InputGroup>
-            <Form.Label htmlFor="basic-url">Email</Form.Label>
-            <InputGroup className="mb-3 settingsInput">
-              <Form.Control
+            </InputGroup> */}
+            <Form.Label htmlFor="basic-url">Notes</Form.Label>
+            <Form.Label className="mb-3 settingsInput">
+              <textarea
+                className="notesInput"
+                style={{ whiteSpace: "pre-wrap" }}
                 id="basic-url"
                 aria-describedby="basic-addon3"
                 onChange={handleUserInfoChange}
-                value={userInfo.email}
-                name="email"
+                value={userInfo.notes}
+                name="notes"
               />
-            </InputGroup>
+            </Form.Label>
           </>
         )}
         <Button onClick={handleSettingsChange}>

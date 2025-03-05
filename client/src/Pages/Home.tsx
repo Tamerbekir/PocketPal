@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Accordion from "react-bootstrap/Accordion";
+import UserCalender from "../Components/UserCalendar";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import "../assets/home.css";
@@ -131,7 +132,7 @@ const Home: React.FC = () => {
               />
             </InputGroup>
             <InputGroup className="mb-3">
-              <InputGroup.Text>Hours</InputGroup.Text>
+              {/* <InputGroup.Text>Hours</InputGroup.Text> */}
               <Form.Control
                 type="number"
                 placeholder="Hours"
@@ -200,6 +201,9 @@ const Home: React.FC = () => {
             </Accordion.Body>
           </Accordion.Item>
         ))}
+        <div className="calendarDiv">
+          <UserCalender />
+        </div>
       </Accordion>
     </div>
   );

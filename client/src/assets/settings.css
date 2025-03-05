@@ -13,6 +13,11 @@
   width: 100%;
 }
 
+.notesInput {
+  width: 100%;
+  height: 300px;
+}
+
 .settingsContainer {
   width: 80%;
   margin: auto;
