@@ -31,8 +31,8 @@ export default function Navbar() {
     <nav className="navDiv">
       <Link to="/">Home</Link>
       {/* <Link to="calendar">Calendar</Link> */}
-      <Link to="settings">Settings</Link>
-      <Link to="login">Login</Link>
+      {/* <Link to="settings">Settings</Link> */}
+      {/* <Link to="login">Login</Link> */}
       {/* taking the className theme we defined and using it here
       creating onClick to activate the toggle for theme
       Using a cursor so it presents itself as clickable for the user */}
