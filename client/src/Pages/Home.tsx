@@ -35,7 +35,10 @@ const Home: React.FC = () => {
   // The value is an array of logs, where each log contains time used, description, and date
   const [activityLogs, setActivityLogs] = useState<{
     [key: number]: ActivityInfo[];
-  }>({});
+  }>(() => {
+    const saved = localStorage.getItem("activityLogs");
+    return saved ? JSON.parse(saved) : {};
+  });
   // Temporarily stores a single log entry before adding it to activityLogs
   // The key is a unique timestamp (from Date.now()), used to identify the activity
   // The value is a single log entry (not an array), containing time used, description, and date
@@ -157,10 +160,8 @@ const Home: React.FC = () => {
                 <Form.Control
                   type="date"
                   name="date"
-                  value={logEntry[activity.id].date}
-                  onChange={(event) =>
-                    handleChangeLogActivityInfo(event, activity.id)
-                  }
+                  value={logEntry[activity.id]?.date || ""}
+                  onChange={(e) => handleChangeLogActivityInfo(e, activity.id)}
                 />
               </InputGroup>
               <InputGroup className="mb-2">
@@ -168,10 +169,8 @@ const Home: React.FC = () => {
                 <Form.Control
                   type="number"
                   name="usedTime"
-                  value={logEntry[activity.id].usedTime}
-                  onChange={(event) =>
-                    handleChangeLogActivityInfo(event, activity.id)
-                  }
+                  value={logEntry[activity.id]?.usedTime || ""}
+                  onChange={(e) => handleChangeLogActivityInfo(e, activity.id)}
                 />
               </InputGroup>
               <InputGroup className="mb-2">
@@ -179,10 +178,8 @@ const Home: React.FC = () => {
                   type="text"
                   placeholder="Description"
                   name="description"
-                  value={logEntry[activity.id].description}
-                  onChange={(event) =>
-                    handleChangeLogActivityInfo(event, activity.id)
-                  }
+                  value={logEntry[activity.id]?.description || ""}
+                  onChange={(e) => handleChangeLogActivityInfo(e, activity.id)}
                 />
               </InputGroup>
               <Button
@@ -194,11 +191,12 @@ const Home: React.FC = () => {
 
               <h5 className="mt-3">Logged Entries</h5>
               <ListGroup>
-                {activityLogs[activity.id].map((log, index) => (
-                  <ListGroup.Item key={index}>
-                    {log.date} - {log.usedTime} hrs - {log.description}
-                  </ListGroup.Item>
-                ))}
+                {activityLogs[activity.id] ||
+                  [].map((log, index) => (
+                    <ListGroup.Item key={index}>
+                      {log.date} - {log.usedTime} hrs - {log.description}
+                    </ListGroup.Item>
+                  ))}
               </ListGroup>
             </Accordion.Body>
           </Accordion.Item>
