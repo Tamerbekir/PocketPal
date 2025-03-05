@@ -191,12 +191,11 @@ const Home: React.FC = () => {
 
               <h5 className="mt-3">Logged Entries</h5>
               <ListGroup>
-                {activityLogs[activity.id] ||
-                  [].map((log, index) => (
-                    <ListGroup.Item key={index}>
-                      {log.date} - {log.usedTime} hrs - {log.description}
-                    </ListGroup.Item>
-                  ))}
+                {(activityLogs[activity.id] || []).map((log, index) => (
+                  <ListGroup.Item key={index}>
+                    {log.date} - {log.usedTime} hrs - {log.description}
+                  </ListGroup.Item>
+                ))}
               </ListGroup>
             </Accordion.Body>
           </Accordion.Item>
