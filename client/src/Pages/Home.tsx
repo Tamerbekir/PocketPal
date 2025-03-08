@@ -46,6 +46,10 @@ const Home: React.FC = () => {
   // Once submitted, it gets added to the activity in activityLogs
   const [logEntry, setLogEntry] = useState<{ [key: number]: ActivityInfo }>({});
 
+  const [editActivity, setEditActivity] = useState<{ [key: number]: number }>(
+    {}
+  );
+
   useEffect(() => {
     localStorage.setItem("activities", JSON.stringify(activities));
   }, [activities]);
@@ -93,7 +97,6 @@ const Home: React.FC = () => {
 
   const handleLogTime = (activityId: number) => {
     const entry = logEntry[activityId];
-
     setActivities((currentActivities) =>
       currentActivities.map((activity) =>
         activity.id === activityId
@@ -104,7 +107,6 @@ const Home: React.FC = () => {
           : activity
       )
     );
-
     setActivityLogs((currentActivityLogs) => ({
       ...currentActivityLogs,
       [activityId]: [...(currentActivityLogs[activityId] || []), entry],
@@ -137,6 +139,13 @@ const Home: React.FC = () => {
 
       return updatedLogs;
     });
+  };
+
+  const handleEditActivity = (activityId: number, index: number) => {
+    setEditActivity((currentEdit) => ({
+      ...currentEdit,
+      [activityId]: index,
+    }));
   };
 
   return (
@@ -180,8 +189,9 @@ const Home: React.FC = () => {
             <Accordion.Body>
               <h5>Log Time</h5>
               <InputGroup className="mb-2">
-                <InputGroup.Text>Date</InputGroup.Text>
+                {/* <InputGroup.Text>Date</InputGroup.Text> */}
                 <Form.Control
+                  placeholder="Date"
                   type="date"
                   name="date"
                   value={logEntry[activity.id]?.date || ""}
@@ -189,8 +199,9 @@ const Home: React.FC = () => {
                 />
               </InputGroup>
               <InputGroup className="mb-2">
-                <InputGroup.Text>Hours Used</InputGroup.Text>
+                {/* <InputGroup.Text>Hours Used</InputGroup.Text> */}
                 <Form.Control
+                  placeholder="Time Used"
                   type="number"
                   name="usedTime"
                   value={logEntry[activity.id]?.usedTime || ""}
@@ -214,12 +225,17 @@ const Home: React.FC = () => {
               </Button>
 
               <h5 className="mt-3">Logged Entries</h5>
-              <ListGroup>
+              <ListGroup className="activityLogs">
                 {(activityLogs[activity.id] || []).map((log, index) => (
                   <>
-                    <ListGroup.Item key={index}>
-                      {log.date} - {log.usedTime} hrs - {log.description}
+                    <ListGroup.Item key={index} className="log-entry">
+                      <div className="log-details">
+                        <span className="log-date">{log.date}</span>
+                        <span className="log-time">{log.usedTime} hrs</span>
+                      </div>
+                      <p className="log-description">{log.description}</p>
                     </ListGroup.Item>
+
                     <>
                       <Button
                         variant="danger"
