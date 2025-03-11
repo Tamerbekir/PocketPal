@@ -34,15 +34,18 @@
    
 Navigate to the project directory:
 
-cd timetracker
+```bash
+   cd timetracker
 
 Install the dependencies:
-npm install
+```bash
+   npm install
 
 Running the Application
 
 Start the development server:
-npm run dev
+```bash
+   npm run dev
 
 Open your browser and visit http://localhost:3000 to see the application in action.
 
