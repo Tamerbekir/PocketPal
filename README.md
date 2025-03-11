@@ -1,10 +1,8 @@
-# TimeTracker2
-
-!Deploy
+# Time Tracker 
 
 ## Overview
 
-**TimeTracker2** is a web application designed to help you log activities and goals, and keep track of the time spent on them. It also features a to-do list to manage your tasks efficiently.
+**Time Tracker** is a web application designed to help you log activities and goals, and keep track of the time spent on them. It also features a to-do list to manage your tasks efficiently.
 
 ## Features
 
@@ -34,22 +32,19 @@
    
 Navigate to the project directory:
 
-```bash
-   cd timetracker
+   ```cd timetracker```
 
 Install the dependencies:
-```bash
-   npm install
 
-Running the Application
+   ```npm install```
 
-Start the development server:
-```bash
-   npm run dev
+Running the Application and start the development server:
 
-Open your browser and visit http://localhost:3000 to see the application in action.
+  ```npm run dev```
 
-Contributing
+Open your browser and visit http://localhost:3001 to see the application in action.
+
+### Contributing
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
 ### License
