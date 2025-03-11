@@ -37,14 +37,15 @@ Navigate to the project directory:
 cd timetracker
 
 Install the dependencies:
-```npm install
+npm install
 
 Running the Application
 
 Start the development server:
-```npm run dev
+npm run dev
 
 Open your browser and visit http://localhost:3000 to see the application in action.
+
 Contributing
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
 
