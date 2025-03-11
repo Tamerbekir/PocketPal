@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.listDiv {
+  border: 2px solid rgb(77, 108, 201);
+  background-color: white;
+  border-radius: 5px;
+
+}
+
+.deleteBtn {
+  margin: 3%;
+}
+
+.todoDate, .todoNotes, .todoItem {
+  margin: 2%;
+  border-radius: 5px;
+}

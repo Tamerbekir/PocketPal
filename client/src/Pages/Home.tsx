@@ -38,13 +38,18 @@ const Home: React.FC = () => {
     [key: number]: ActivityInfo[];
   }>(() => {
     const saved = localStorage.getItem("activityLogs");
-    return saved ? JSON.parse(saved) : {};
+    return saved ? JSON.parse(saved) : [];
   });
   // Temporarily stores a single log entry before adding it to activityLogs
   // The key is a unique timestamp (from Date.now()), used to identify the activity
   // The value is a single log entry (not an array), containing time used, description, and date
   // Once submitted, it gets added to the activity in activityLogs
-  const [logEntry, setLogEntry] = useState<{ [key: number]: ActivityInfo }>({});
+  const [logEntry, setLogEntry] = useState<{ [key: number]: ActivityInfo }>(
+    () => {
+      const saved = localStorage.getItem("logEntry");
+      return saved ? JSON.parse(saved) : [];
+    }
+  );
 
   const [editActivity, setEditActivity] = useState<{ [key: number]: number }>(
     {}
@@ -53,6 +58,14 @@ const Home: React.FC = () => {
   useEffect(() => {
     localStorage.setItem("activities", JSON.stringify(activities));
   }, [activities]);
+
+  useEffect(() => {
+    localStorage.setItem("logEntry", JSON.stringify(logEntry));
+  }, [logEntry]);
+
+  useEffect(() => {
+    localStorage.setItem("activityLogs", JSON.stringify(activityLogs));
+  }, [activityLogs]);
 
   // Handing changing activity info
   const handleChangeActivity = (event: ChangeEvent<HTMLInputElement>) => {

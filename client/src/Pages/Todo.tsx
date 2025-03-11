@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../assets/todo.css";
 
 export default function Todo() {
   interface Todo {
@@ -13,7 +14,10 @@ export default function Todo() {
     notes: "",
   });
 
-  const [submitTodo, setSubmitTodo] = useState<Todo[]>([]);
+  const [submitTodo, setSubmitTodo] = useState<Todo[]>(() => {
+    const savedData = localStorage.getItem("submitTodo");
+    return savedData ? JSON.parse(savedData) : [];
+  });
 
   const [completeTodo, setCompleteTodo] = useState(null);
 
@@ -33,23 +37,52 @@ export default function Todo() {
     console.log(updateTodo);
   };
 
+  useEffect(() => {
+    localStorage.setItem("submitTodo", JSON.stringify(submitTodo));
+  }, [submitTodo]);
+
   return (
     <div>
-      <h1>Todo</h1>
-      <input
-        placeholder="add a todo.."
-        type="text"
-        name="item"
-        value={todo.item}
-        onChange={handleTodoChange}
-      />
-      <button onClick={handleSubmitTodo}>Add</button>
+      <div className="container">
+        <h1>Todo</h1>
+        <input
+          placeholder="To do"
+          type="text"
+          name="item"
+          value={todo.item}
+          onChange={handleTodoChange}
+          className="todoItem"
+        />
+        <textarea
+          placeholder="Notes"
+          name="notes"
+          value={todo.notes}
+          onChange={handleTodoChange}
+          className="todoNotes"
+        />
+        <input
+          placeholder="add a todo.."
+          type="date"
+          name="date"
+          value={todo.date}
+          className="todoDate"
+          onChange={handleTodoChange}
+        />
+        <button onClick={handleSubmitTodo}>Add</button>
+      </div>
       <h4>List</h4>
-      <div>
+      <div className="listDiv">
         {submitTodo.map((addedItem, index) => (
           <div key={index}>
+            <p>{addedItem.date}</p>
             <p>{addedItem.item}</p>
-            <button onClick={() => handleDeleteTodo(index)}>Delete</button>
+            <p>{addedItem.notes}</p>
+            <button
+              className="deleteBtn"
+              onClick={() => handleDeleteTodo(index)}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </div>
