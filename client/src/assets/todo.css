@@ -1,10 +1,22 @@
 .container {
   display: flex;
   flex-direction: column;
+  border: 2px solid black;
+  box-shadow: 10px 10px 0px 0px rgb(183, 183, 183);
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.addBtn {
+  border: 2px solid black;
+  box-shadow: 5px 5px 0px 0px rgba(183, 183, 183, 0.471);
+  margin-top: 5%;
+  margin-bottom: 5%;
+  color: rgb(87, 162, 162);
 }
 
 .listDiv {
-  border: 2px solid rgb(77, 108, 201);
+  border: 2px solid rgb(125, 144, 204);
   background-color: white;
   border-radius: 5px;
 
