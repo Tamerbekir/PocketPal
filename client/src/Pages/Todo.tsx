@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import Form from "react-bootstrap/Form";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import InputGroup from "react-bootstrap/InputGroup";
 import "../assets/todo.css";
 
 export default function Todo() {
@@ -45,36 +48,50 @@ export default function Todo() {
     <div>
       <div className="container">
         <h1>Todo</h1>
-        <input
-          placeholder="To do"
-          type="text"
-          name="item"
-          value={todo.item}
-          onChange={handleTodoChange}
-          className="todoItem"
-        />
-        <textarea
-          placeholder="Notes"
-          name="notes"
-          value={todo.notes}
-          onChange={handleTodoChange}
-          className="todoNotes"
-        />
-        <input
-          placeholder="add a todo.."
-          type="date"
-          name="date"
-          value={todo.date}
-          className="todoDate"
-          onChange={handleTodoChange}
-        />
+        <InputGroup className="mb-3">
+          <FloatingLabel controlId="floatingTextarea2" label="Add an item">
+            <Form.Control
+              placeholder="To do"
+              type="text"
+              name="item"
+              value={todo.item}
+              onChange={handleTodoChange}
+              className="todoItem"
+              aria-describedby="basic-addon1"
+            />
+          </FloatingLabel>
+        </InputGroup>
+        <FloatingLabel controlId="floatingTextarea2" label="Note">
+          <Form.Control
+            as="textarea"
+            name="notes"
+            value={todo.notes}
+            onChange={handleTodoChange}
+            placeholder="Leave a comment here"
+            style={{ height: "100px" }}
+          />
+        </FloatingLabel>
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            value={todo.date}
+            label="Date"
+            name="date"
+            className="todoDate"
+            onChange={() => handleDateChange}
+            slotProps={{
+              textField: {
+                helperText: "MM/DD/YYYY",
+              },
+            }}
+          />
+        </LocalizationProvider> */}
         <button onClick={handleSubmitTodo}>Add</button>
       </div>
       <h4>List</h4>
       <div className="listDiv">
         {submitTodo.map((addedItem, index) => (
           <div key={index}>
-            <p>{addedItem.date}</p>
+            {/* <p>{addedItem.date}</p> */}
             <p>{addedItem.item}</p>
             <p>{addedItem.notes}</p>
             <button

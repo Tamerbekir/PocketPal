@@ -13,12 +13,25 @@
     "client": "npm --prefix client run dev"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.7",
+    "@mui/styled-engine-sc": "^6.4.6",
+    "@mui/x-date-pickers": "^7.27.3",
     "bootstrap": "^5.3.3",
+    "datepicker": "^0.0.0",
+    "DatePicker": "^2.0.0",
+    "dayjs": "^1.11.13",
+    "flowbite-react": "^0.10.2",
+    "i": "^0.3.7",
+    "install": "^0.13.0",
+    "npm": "^10.9.2",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.9",
     "react-calendar": "^5.1.0",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.2.0"
+    "react-router-dom": "^7.2.0",
+    "styled-components": "^6.1.15"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
