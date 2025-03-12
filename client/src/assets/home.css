@@ -1,109 +1,95 @@
 .container {
+  font-family: 'VT323', monospace;
   max-width: 800px;
   margin: auto;
   padding: 10px;
-  /* background-color: #8f66c438; */
-  border-radius: 10px;
+  border: 3px solid #5a5a5a;
+  background-color: #dfdfdf;
+  box-shadow: 4px 4px 0px #888;
 }
 
-.title {
+.section-title {
   text-align: center;
-  margin-bottom: 20px;
-  color: #2c3e50;
-  font-family: 'Arial', sans-serif;
-}
-
-.accordion .accordion-header {
-  font-size: 1.2rem;
-}
-
-.calendarDiv {
+  font-family: 'VT323', monospace;
   margin: 5%;
-  width: auto;
+  font-size: 25px;
+  /* background-color: #bdbdbd; */
+  padding: 8px;
+  border-bottom: 2px solid #5a5a5a;
+  text-transform: uppercase;
 }
 
-.btn-add {
-  display: block;
-  width: 100%;
+/* .addActivityBtn {
+  font-family: 'VT323', monospace;
+} */
+
+.delete-activity-btn {
+  margin-left: 5%;
+  font-size: 15px !important;
+  font-family: 'VT323', monospace;
+  background-color: rgba(255, 0, 0, 0.703);
+}
+
+.deleteEntryBtn {
+  font-size: 12px !important;
+  font-family: 'VT323', monospace;
+  background-color: rgba(255, 0, 0, 0.346);
+}
+
+.activity-form {
   padding: 10px;
-  margin-top: 10px;
-  background-color: #3c4d47;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border: 2px solid #5a5a5a;
+  background-color: #c0c0c0;
+  box-shadow: inset 2px 2px 0px #888;
 }
 
-.btn-add:hover {
-  background-color: #32413c4b(84, 216, 176, 0.74);
-}
-
-.btn-delete {
-  display: block;
-  width: 25%;
-  padding: 5px;
-  margin-top: 10px;
-  font-size: 10px;
-  background-color: #961a0c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.deleteActivityBtn {
-  margin: 5%;
-}
-
-.btn-delete:hover {
-  background-color: #c0392b;
-}
-
-.info-item {
-  background-color: #222c2e3a;
-  padding: 10px;
-  border-radius: 5px;
+.activity-panel {
+  font-family: 'VT323', monospace;
+  background-color: #dfdfdf;
+  border: 2px solid #5a5a5a;
   margin-bottom: 10px;
+  box-shadow: 3px 3px 0px #888;
 }
 
-p {
-  margin-bottom: 30px;
-  color: #2c3e50;
-  font-family: 'Arial', sans-serif;
-}
-
-
-.log-entry {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 6px;
-}
-
-.log-details {
-  display: flex;
-  justify-content: space-between;
+.panel-header {
+  font-family: 'VT323', monospace;
+  background-color: #bdbdbd;
+  padding: 8px;
+  font-size: 23px;
+  cursor: pointer;
   font-weight: bold;
+  border-bottom: 2px solid #5a5a5a;
 }
 
-.log-date {
-  color: #5988bbd4;
+.panel-header:hover {
+  font-family: 'VT323', monospace;
+  background-color: #a9a9a9;
 }
 
-.log-time {
-  color: #1d8134d0;
+.header {
+  text-align: center;
+  font-family: 'VT323', monospace;
+  color: white;
+  font-size: 40px;
 }
 
-.log-description {
-  font-size: 18px;
-  color: #555;
-  margin-top: 5px;
+.panel-body {
+  padding: 10px;
+  background-color: #c0c0c0;
 }
 
-.activityLogs {
-  margin: 2%;
+button {
+  font-family: 'VT323', monospace;
+  font-size: 14px;
+  background-color: #dfdfdf;
+  color: black;
+  border: 2px solid #5a5a5a;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+  background-color: #bdbdbd;
+  box-shadow: inset 2px 2px 0px #888;
 }

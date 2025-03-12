@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import InputGroup from "react-bootstrap/InputGroup";
 import DateTimePicker from "react-datetime-picker";
+import "../assets/todo.css";
 
 import "../assets/todo.css";
 
@@ -50,7 +51,14 @@ export default function Todo() {
   return (
     <div>
       <div className="container">
-        <h1>Todo</h1>
+        <h1 className="todoList">To Do List</h1>
+        <p className="caughtUpText">
+          {submitTodo.length < 1 ? (
+            <p>Looks like you're all caught up!</p>
+          ) : (
+            <p>You have {submitTodo.length} tasks remaining</p>
+          )}
+        </p>
         <InputGroup className="mb-3">
           <FloatingLabel controlId="floatingTextarea2" label="Add an item">
             <Form.Control
@@ -93,15 +101,17 @@ export default function Todo() {
       <div className="listDiv">
         {submitTodo.map((addedItem, index) => (
           <div key={index}>
-            <p>{addedItem.date}</p>
-            <p>{addedItem.item}</p>
-            <p>{addedItem.notes}</p>
-            <button
-              className="deleteBtn"
-              onClick={() => handleDeleteTodo(index)}
-            >
-              Delete
-            </button>
+            <p>Complete by: {addedItem.date}</p>
+            <p>To Do: {addedItem.item}</p>
+            <p>Notes: {addedItem.notes}</p>
+            <div className="deleteBtnDiv">
+              <button
+                className="deleteBtn"
+                onClick={() => handleDeleteTodo(index)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         ))}
       </div>

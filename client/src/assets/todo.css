@@ -1,32 +1,90 @@
+/* General Retro Aesthetic */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+  font-family: 'VT323', monospace;
+  background-color: #c0c0c0; 
+  color: black;
+  text-align: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
-  border: 2px solid black;
-  box-shadow: 10px 10px 0px 0px rgb(183, 183, 183);
-  margin-top: 5%;
-  margin-bottom: 5%;
+  border: 3px solid #5a5a5a; 
+  background-color: #dfdfdf; 
+  color: black;
+  padding: 20px;
+  max-width: 600px;
+  margin: 40px auto;
+  box-shadow: 4px 4px 0px #888; 
 }
 
-.addBtn {
-  border: 2px solid black;
-  box-shadow: 5px 5px 0px 0px rgba(183, 183, 183, 0.471);
-  margin-top: 5%;
-  margin-bottom: 5%;
-  color: rgb(87, 162, 162);
+.todoList {
+  font-size: 40px;
+  font-family: 'VT323', monospace;
+}
+
+.addBtn, .deleteBtn {
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  background-color: #dfdfdf;
+  color: black;
+  border: 2px solid #5a5a5a;
+  padding: 8px 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.addBtn:hover, .deleteBtn:hover {
+  background-color: #bdbdbd;
+  box-shadow: inset 2px 2px 0px #888;
+}
+
+.todoItem, .todoNotes, .todoDate {
+  background-color: white;
+  color: black;
+  border: 2px solid #5a5a5a;
+  font-family: 'VT323', monospace;
+  font-size: 30px;
+  padding: 8px;
+  margin: 5px 0;
+  width: 100%;
+  box-shadow: inset 0px 2px 0px #a0a0a0;
+}
+
+.caughtUpText {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #5a5a5a;
+  font-style: italic;
 }
 
 .listDiv {
-  border: 2px solid rgb(125, 144, 204);
+  font-family: 'VT323', monospace;
+  border: 3px solid #5a5a5a;
   background-color: white;
-  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 3px 3px 0px #888;
+}
 
+.listDiv p {
+  border-bottom: 2px solid black;
+  font-size: 20px;
+  color: black;
+}
+
+.deleteBtnDiv {
+  margin-bottom: 10%;
+  border-bottom: 2px solid rgba(5, 2, 2, 0.328);
 }
 
 .deleteBtn {
-  margin: 3%;
-}
-
-.todoDate, .todoNotes, .todoItem {
-  margin: 2%;
-  border-radius: 5px;
+  font-family: 'VT323', monospace;
+  margin: 5px;
+  background-color: #dfdfdf;
 }

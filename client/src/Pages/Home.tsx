@@ -1,9 +1,6 @@
 import React, { useState, ChangeEvent, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import Accordion from "react-bootstrap/Accordion";
-import UserCalender from "../Components/UserCalendar";
-import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 import "../assets/home.css";
 
@@ -50,6 +47,8 @@ const Home: React.FC = () => {
       return saved ? JSON.parse(saved) : [];
     }
   );
+
+  const [openPanel, setOpenPanel] = useState<number | null>(null);
 
   const [editActivity, setEditActivity] = useState<{ [key: number]: number }>(
     {}
@@ -160,123 +159,126 @@ const Home: React.FC = () => {
       [activityId]: index,
     }));
   };
-
   return (
-    <div className="container">
-      <Accordion defaultActiveKey="0" className="accordion">
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>Add New Activity</Accordion.Header>
-          <Accordion.Body>
-            <InputGroup className="mb-3">
-              <Form.Control
-                type="text"
-                placeholder="Activity Name"
-                onChange={handleChangeActivity}
-                value={userInfo.activity}
-                name="activity"
-              />
-            </InputGroup>
-            <InputGroup className="mb-3">
-              {/* <InputGroup.Text>Hours</InputGroup.Text> */}
-              <Form.Control
-                type="number"
-                placeholder="Hours"
-                onChange={handleChangeActivity}
-                value={userInfo.startingTime || ""}
-                name="startingTime"
-              />
-            </InputGroup>
-            {userInfo.activity && userInfo.startingTime > 0 && (
-              <Button variant="primary" onClick={handleAddActivity}>
-                Add Activity
-              </Button>
-            )}
-          </Accordion.Body>
-        </Accordion.Item>
+    <>
+      <h1 className="header">Pocket Pal</h1>
+
+      <div className="container">
+        {/* <h3 className="section-title">Add New Activity</h3> */}
+        <div className="activity-form">
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="Add new activity"
+              onChange={handleChangeActivity}
+              value={userInfo.activity}
+              name="activity"
+            />
+          </InputGroup>
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="number"
+              placeholder="Add hours"
+              onChange={handleChangeActivity}
+              value={userInfo.startingTime || ""}
+              name="startingTime"
+            />
+          </InputGroup>
+          {userInfo.activity && userInfo.startingTime > 0 && (
+            <button className="addActivityBtn" onClick={handleAddActivity}>
+              Add Activity
+            </button>
+          )}
+        </div>
+
+        {activities.length < 1 ? (
+          <p className="section-title">
+            Seems like you don't have any activities yet...
+          </p>
+        ) : (
+          <h3 className="section-title">Activities</h3>
+        )}
 
         {activities.map((activity, index) => (
-          <Accordion.Item eventKey={activity.id.toString()} key={activity.id}>
-            <Accordion.Header>
+          <div key={activity.id} className="activity-panel">
+            <div
+              className="panel-header"
+              onClick={() => setOpenPanel(openPanel === index ? null : index)}
+            >
               {activity.activity} - {activity.startingTime} hours left
-            </Accordion.Header>
-            <Accordion.Body>
-              <h5>Log Time</h5>
-              <InputGroup className="mb-2">
-                {/* <InputGroup.Text>Date</InputGroup.Text> */}
-                <Form.Control
-                  placeholder="Date"
-                  type="date"
-                  name="date"
-                  value={logEntry[activity.id]?.date || ""}
-                  onChange={(e) => handleChangeLogActivityInfo(e, activity.id)}
-                />
-              </InputGroup>
-              <InputGroup className="mb-2">
-                {/* <InputGroup.Text>Hours Used</InputGroup.Text> */}
-                <Form.Control
-                  placeholder="Time Used"
-                  type="number"
-                  name="usedTime"
-                  value={logEntry[activity.id]?.usedTime || ""}
-                  onChange={(e) => handleChangeLogActivityInfo(e, activity.id)}
-                />
-              </InputGroup>
-              <InputGroup className="mb-2">
-                <Form.Control
-                  type="text"
-                  placeholder="Description"
-                  name="description"
-                  value={logEntry[activity.id]?.description || ""}
-                  onChange={(e) => handleChangeLogActivityInfo(e, activity.id)}
-                />
-              </InputGroup>
-              <Button
-                variant="success"
-                onClick={() => handleLogTime(activity.id)}
+              <button
+                className="delete-activity-btn"
+                onClick={() => handleDeleteActivity(index)}
               >
-                Log Time
-              </Button>
+                Delete {activity.activity}
+              </button>
+            </div>
+            {openPanel === index && (
+              <div className="panel-body">
+                <h5>Log Time</h5>
+                <InputGroup className="mb-2">
+                  <Form.Control
+                    placeholder="Date"
+                    type="date"
+                    name="date"
+                    value={logEntry[activity.id]?.date || ""}
+                    onChange={(e) =>
+                      handleChangeLogActivityInfo(e, activity.id)
+                    }
+                  />
+                </InputGroup>
+                <InputGroup className="mb-2">
+                  <Form.Control
+                    placeholder="Time Used"
+                    type="number"
+                    name="usedTime"
+                    value={logEntry[activity.id]?.usedTime || ""}
+                    onChange={(e) =>
+                      handleChangeLogActivityInfo(e, activity.id)
+                    }
+                  />
+                </InputGroup>
+                <InputGroup className="mb-2">
+                  <Form.Control
+                    type="text"
+                    placeholder="Description"
+                    name="description"
+                    value={logEntry[activity.id]?.description || ""}
+                    onChange={(e) =>
+                      handleChangeLogActivityInfo(e, activity.id)
+                    }
+                  />
+                </InputGroup>
+                <button onClick={() => handleLogTime(activity.id)}>
+                  Log Time
+                </button>
 
-              <h5 className="mt-3">Logged Entries</h5>
-              <ListGroup className="activityLogs">
-                {(activityLogs[activity.id] || []).map((log, index) => (
-                  <>
-                    <ListGroup.Item key={index} className="log-entry">
+                <h5 className="mt-3">Logged Entries</h5>
+                <ListGroup className="activityLogs">
+                  {(activityLogs[activity.id] || []).map((log, logIndex) => (
+                    <ListGroup.Item key={logIndex} className="log-entry">
                       <div className="log-details">
                         <span className="log-date">{log.date}</span>
                         <span className="log-time">{log.usedTime} hrs</span>
                       </div>
                       <p className="log-description">{log.description}</p>
-                    </ListGroup.Item>
-
-                    <>
-                      <Button
-                        variant="danger"
+                      <button
+                        className="deleteEntryBtn"
                         onClick={() =>
-                          handleDeleteActivityInfo(activity.id, index)
+                          handleDeleteActivityInfo(activity.id, logIndex)
                         }
                       >
                         Delete Entry
-                      </Button>
-                    </>
-                  </>
-                ))}
-              </ListGroup>
-              <Button
-                className="deleteActivityBtn"
-                variant="danger"
-                onClick={() => handleDeleteActivity(index)}
-              >
-                Delete {activity.activity}
-              </Button>
-            </Accordion.Body>
-          </Accordion.Item>
+                      </button>
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </div>
+            )}
+          </div>
         ))}
-        <div className="calendarDiv">
-          <UserCalender />
-        </div>
-      </Accordion>
-    </div>
+      </div>
+    </>
   );
 };
 

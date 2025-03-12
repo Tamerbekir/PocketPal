@@ -29,18 +29,18 @@ export default function Navbar() {
 
   return (
     <nav className="navDiv">
-      <Link to="/">Home</Link>
+      <Link to="/">Activities</Link>
       {/* <Link to="calendar">Calendar</Link> */}
+      <Link to="todo">To Do</Link>
       <Link to="settings">Settings</Link>
-      <Link to="todo">Todo</Link>
       {/* <Link to="login">Login</Link> */}
       {/* taking the className theme we defined and using it here
       creating onClick to activate the toggle for theme
       Using a cursor so it presents itself as clickable for the user */}
-      <a className="theme" onClick={handleTheme} style={{ cursor: "pointer" }}>
-        {/* If the theme is light, make it dark, otherwise keep it as light. 'Light' and "Dark" are visually shown on page */}
-        {theme === "light" ? "Dark" : "Light"}
-      </a>
+      {/* <a className="theme" onClick={handleTheme} style={{ cursor: "pointer" }}> */}
+      {/* If the theme is light, make it dark, otherwise keep it as light. 'Light' and "Dark" are visually shown on page */}
+      {/* {theme === "light" ? "Dark" : "Light"} */}
+      {/* </a> */}
     </nav>
   );
 }
