@@ -8,6 +8,8 @@ interface UserInfo {
   id: number;
   activity: string;
   startingTime: number;
+  tracker: string;
+  length: string;
 }
 
 interface ActivityInfo {
@@ -21,6 +23,8 @@ const Home: React.FC = () => {
     id: Date.now(),
     activity: "",
     startingTime: 0,
+    tracker: "",
+    length: "",
   });
 
   //Empty array for each activity the user logs
@@ -94,7 +98,13 @@ const Home: React.FC = () => {
       [newActivity.id]: { usedTime: 0, date: "", description: "" },
     }));
     // resetting the user input fields
-    setUserInfo({ id: Date.now(), activity: "", startingTime: 0 });
+    setUserInfo({
+      id: Date.now(),
+      activity: "",
+      startingTime: 0,
+      tracker: "",
+      length: "",
+    });
   };
 
   const handleChangeLogActivityInfo = (
@@ -213,10 +223,29 @@ const Home: React.FC = () => {
           <InputGroup className="mb-3">
             <Form.Control
               type="number"
-              placeholder="Add hours"
+              placeholder="Add Amount"
               onChange={handleChangeActivity}
               value={userInfo.startingTime || ""}
               name="startingTime"
+            />
+          </InputGroup>
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="text"
+              placeholder="What are you tracking?"
+              onChange={handleChangeActivity}
+              value={userInfo.tracker || ""}
+              name="tracker"
+            />
+          </InputGroup>
+          <p>How long do you wish to track this activity?</p>
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="date"
+              placeholder="Long long do you want to track this?"
+              onChange={handleChangeActivity}
+              value={userInfo.length || ""}
+              name="length"
             />
           </InputGroup>
           {userInfo.activity && userInfo.startingTime > 0 && (
@@ -240,7 +269,8 @@ const Home: React.FC = () => {
               className="panel-header"
               onClick={() => setOpenPanel(openPanel === index ? null : index)}
             >
-              {activity.activity} - {activity.startingTime} hours left
+              {activity.activity} - {activity.startingTime} {activity.tracker}{" "}
+              left
               <button
                 className="delete-activity-btn"
                 onClick={() => handleDeleteActivity(index)}
@@ -294,7 +324,10 @@ const Home: React.FC = () => {
                     <ListGroup.Item key={logIndex} className="log-entry">
                       <div className="log-details">
                         <span className="log-date">{log.date}</span>
-                        <span className="log-time">{log.usedTime} hrs</span>
+                        <span className="log-time">{log.usedTime}</span>
+                        {tracker.map((track, index) => (
+                          <p key={index}>track.tracker</p>
+                        ))}
                       </div>
                       <p className="log-description">{log.description}</p>
                       <button

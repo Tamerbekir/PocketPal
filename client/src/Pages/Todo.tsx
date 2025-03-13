@@ -20,13 +20,13 @@ export default function Todo() {
     notes: "",
   });
 
-  const [date, setDate] = useState(new Date());
   const [submitTodo, setSubmitTodo] = useState<Todo[]>(() => {
     const savedData = localStorage.getItem("submitTodo");
     return savedData ? JSON.parse(savedData) : [];
   });
 
-  const [completedTodos, setCompletedTodos] = useState([]);
+  const [complete, setComplete] = useState<boolean | null>(null);
+  const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
 
   const handleTodoChange = (event) => {
     const { name, value } = event.target;
@@ -37,13 +37,14 @@ export default function Todo() {
     setSubmitTodo([...submitTodo, todo]);
   };
 
-  const handleCompletedTodos = (index: number) => {
-    setSubmitTodo((previousState) =>
-      previousState.map((todo, i) =>
-        i === index ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
+  // const handleCompletedTodos = (index: number) => {
+  //   setSubmitTodo((previousState) =>
+  //     previousState.map((todo, completedItem) =>
+  //       completedItem === index ? { ...todo, completed: !completedItem.completed } : todo
+  //     )
+  //   );
+  //   console.log(todo.completed);
+  // };
 
   const handleDeleteTodo = (index: number) => {
     const updateTodo = [...submitTodo];
@@ -119,12 +120,12 @@ export default function Todo() {
               >
                 Delete
               </button>
-              {/* <button
+              <button
                 className="completeBtn"
                 onClick={() => handleCompletedTodos(index)}
               >
                 Complete
-              </button> */}
+              </button>
             </div>
           </div>
         ))}
