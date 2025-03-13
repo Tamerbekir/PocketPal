@@ -24,16 +24,17 @@
 } */
 
 .delete-activity-btn {
-  margin-left: 5%;
-  font-size: 15px !important;
+  display: flex;
+  float: right;
+  font-size: 9px !important;
   font-family: 'VT323', monospace;
   background-color: rgba(255, 0, 0, 0.703);
 }
 
 .deleteEntryBtn {
-  font-size: 12px !important;
+  /* font-size: 12px !important; */
   font-family: 'VT323', monospace;
-  background-color: rgba(255, 0, 0, 0.346);
+  color: rgba(255, 0, 0, 0.696);
 }
 
 .activity-form {

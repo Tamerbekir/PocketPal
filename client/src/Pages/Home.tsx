@@ -49,6 +49,7 @@ const Home: React.FC = () => {
   );
 
   const [openPanel, setOpenPanel] = useState<number | null>(null);
+  const [openOptions, setOpenOptions] = useState<number | null>(null);
 
   const [editActivity, setEditActivity] = useState<{ [key: number]: number }>(
     {}
@@ -114,7 +115,8 @@ const Home: React.FC = () => {
         activity.id === activityId
           ? {
               ...activity,
-              startingTime: activity.startingTime - entry.usedTime,
+              startingTime:
+                Number(activity.startingTime) - Number(entry.usedTime),
             }
           : activity
       )
@@ -132,33 +134,66 @@ const Home: React.FC = () => {
 
   // deleting activity from array and return array without item spliced
   const handleDeleteActivity = (index: number) => {
-    setActivities((currentActivities) => {
-      const currentActivitiesArray = [...currentActivities];
-      currentActivitiesArray.splice(index, 1)[0];
-      return currentActivitiesArray;
-    });
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete this activity? This is irreversible`
+    );
+
+    if (confirmDelete) {
+      setActivities((currentActivities) => {
+        const currentActivitiesArray = [...currentActivities];
+        currentActivitiesArray.splice(index, 1)[0];
+        return currentActivitiesArray;
+      });
+    } else {
+      alert("Canceled");
+    }
   };
 
   // deleting the activity based on key (date) as well as its position in the array
   const handleDeleteActivityInfo = (activityId: number, index: number) => {
-    setActivityLogs((currentLogs) => {
-      const updatedLogs = { ...currentLogs };
-      // Because we are deleting from an object, an if statement is needed
-      //copy array over
-      updatedLogs[activityId] = [...updatedLogs[activityId]];
-      // then proceed to delete from array
-      updatedLogs[activityId].splice(index, 1)[0];
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete this this activity info? This is irreversible`
+    );
 
-      return updatedLogs;
-    });
+    if (confirmDelete) {
+      setActivityLogs((currentLogs) => {
+        const updatedLogs = { ...currentLogs };
+        const deletedEntry = updatedLogs[activityId][index];
+
+        // Because we are deleting from an object, an if statement is needed
+        //copy array over
+        updatedLogs[activityId] = [...updatedLogs[activityId]];
+        // then proceed to delete from array
+        updatedLogs[activityId].splice(index, 1)[0];
+
+        //mapping over all activities, and if the current activity matches the index when deleting, set the value for the starting time by adding back the used time to the starting time
+        setActivities((currentActivities) =>
+          currentActivities.map((activity) =>
+            activity.id === activityId
+              ? {
+                  ...activity,
+                  startingTime:
+                    Number(activity.startingTime) +
+                    Number(deletedEntry.usedTime),
+                }
+              : activity
+          )
+        );
+
+        return updatedLogs;
+      });
+    } else {
+      alert("Canceled");
+    }
   };
 
-  const handleEditActivity = (activityId: number, index: number) => {
-    setEditActivity((currentEdit) => ({
-      ...currentEdit,
-      [activityId]: index,
-    }));
-  };
+  // const handleEditActivity = (activityId: number, index: number) => {
+  //   setEditActivity((currentEdit) => ({
+  //     ...currentEdit,
+  //     [activityId]: index,
+  //   }));
+  // };
+
   return (
     <>
       <h1 className="header">Pocket Pal</h1>
@@ -263,13 +298,29 @@ const Home: React.FC = () => {
                       </div>
                       <p className="log-description">{log.description}</p>
                       <button
-                        className="deleteEntryBtn"
                         onClick={() =>
-                          handleDeleteActivityInfo(activity.id, logIndex)
+                          setOpenOptions(
+                            openOptions === logIndex ? null : logIndex
+                          )
                         }
                       >
-                        Delete Entry
+                        {openOptions === logIndex ? "Close" : "Options"}
                       </button>
+                      {openOptions === logIndex && (
+                        <>
+                          <button onClick={() => handleLogTime(activity.id)}>
+                            Edit
+                          </button>
+                          <button
+                            className="deleteEntryBtn"
+                            onClick={() =>
+                              handleDeleteActivityInfo(activity.id, logIndex)
+                            }
+                          >
+                            Delete Entry
+                          </button>
+                        </>
+                      )}
                     </ListGroup.Item>
                   ))}
                 </ListGroup>

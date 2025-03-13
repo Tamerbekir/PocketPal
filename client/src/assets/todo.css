@@ -32,6 +32,7 @@ body {
   color: black;
   border: 2px solid #5a5a5a;
   padding: 8px 12px;
+  box-shadow: 7px 7px 0px rgba(0, 0, 0, 0.539);
   cursor: pointer;
   text-transform: uppercase;
   transition: background-color 0.2s, box-shadow 0.2s;
@@ -65,9 +66,11 @@ input::placeholder, textarea::placeholder {
 }
 
 .listDiv {
+  margin: auto;
+  max-width: 800px;
   font-family: 'VT323', monospace;
   border: 3px solid #5a5a5a;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.722);
   padding: 10px;
   box-shadow: 3px 3px 0px #888;
 }
@@ -84,6 +87,7 @@ input::placeholder, textarea::placeholder {
 }
 
 .deleteBtn {
+  color: rgba(255, 0, 0, 0.696);
   font-family: 'VT323', monospace;
   margin: 5px;
   background-color: #dfdfdf;

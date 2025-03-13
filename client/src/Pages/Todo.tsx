@@ -26,7 +26,7 @@ export default function Todo() {
     return savedData ? JSON.parse(savedData) : [];
   });
 
-  const [completeTodo, setCompleteTodo] = useState(null);
+  const [completedTodos, setCompletedTodos] = useState([]);
 
   const handleTodoChange = (event) => {
     const { name, value } = event.target;
@@ -35,6 +35,14 @@ export default function Todo() {
 
   const handleSubmitTodo = () => {
     setSubmitTodo([...submitTodo, todo]);
+  };
+
+  const handleCompletedTodos = (index: number) => {
+    setSubmitTodo((previousState) =>
+      previousState.map((todo, i) =>
+        i === index ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
   };
 
   const handleDeleteTodo = (index: number) => {
@@ -97,8 +105,8 @@ export default function Todo() {
           Add
         </button>
       </div>
-      <h4>List</h4>
       <div className="listDiv">
+        <h4>List</h4>
         {submitTodo.map((addedItem, index) => (
           <div key={index}>
             <p>Complete by: {addedItem.date}</p>
@@ -111,6 +119,12 @@ export default function Todo() {
               >
                 Delete
               </button>
+              {/* <button
+                className="completeBtn"
+                onClick={() => handleCompletedTodos(index)}
+              >
+                Complete
+              </button> */}
             </div>
           </div>
         ))}

@@ -1,0 +1,23 @@
+<svg
+  width="64"
+  height="64"
+  viewBox="0 0 64 64"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+>
+  <!-- Background Square -->
+  <rect width="64" height="64" fill="#C0C0C0" stroke="#5A5A5A" stroke-width="4" />
+
+  <!-- Screen / Face -->
+  <rect x="12" y="12" width="40" height="30" fill="#000080" stroke="#5A5A5A" stroke-width="2" />
+  <circle cx="24" cy="24" r="3" fill="white" />
+  <circle cx="40" cy="24" r="3" fill="white" />
+
+  <!-- Pixelated Smiley -->
+  <path d="M22 30h4v2h-4v-2zm12 0h4v2h-4v-2z" fill="white" />
+
+  <!-- Buttons -->
+  <rect x="16" y="48" width="12" height="8" fill="#008000" stroke="#5A5A5A" stroke-width="2" />
+  <rect x="36" y="48" width="12" height="8" fill="#800000" stroke="#5A5A5A" stroke-width="2" />
+
+</svg>
