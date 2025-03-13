@@ -79,6 +79,14 @@
   background-color: #c0c0c0;
 }
 
+.log-date {
+}
+
+.log-amount {
+  display: flex;
+  float: right;
+}
+
 button {
   font-family: 'VT323', monospace;
   font-size: 14px;

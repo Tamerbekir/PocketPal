@@ -7,13 +7,13 @@ import "../assets/home.css";
 interface UserInfo {
   id: number;
   activity: string;
-  startingTime: number;
+  startingAmount: number;
   tracker: string;
   length: string;
 }
 
 interface ActivityInfo {
-  usedTime: number;
+  usedAmount: number;
   date: string;
   description: string;
 }
@@ -22,7 +22,7 @@ const Home: React.FC = () => {
   const [userInfo, setUserInfo] = useState<UserInfo>({
     id: Date.now(),
     activity: "",
-    startingTime: 0,
+    startingAmount: 0,
     tracker: "",
     length: "",
   });
@@ -95,13 +95,13 @@ const Home: React.FC = () => {
     setLogEntry((currentLogs) => ({
       ...currentLogs,
       // Keep the existing entries and add a new entry with default values for the new activity
-      [newActivity.id]: { usedTime: 0, date: "", description: "" },
+      [newActivity.id]: { usedAmount: 0, date: "", description: "" },
     }));
     // resetting the user input fields
     setUserInfo({
       id: Date.now(),
       activity: "",
-      startingTime: 0,
+      startingAmount: 0,
       tracker: "",
       length: "",
     });
@@ -118,15 +118,15 @@ const Home: React.FC = () => {
     }));
   };
 
-  const handleLogTime = (activityId: number) => {
+  const handleLogAmount = (activityId: number) => {
     const entry = logEntry[activityId];
     setActivities((currentActivities) =>
       currentActivities.map((activity) =>
         activity.id === activityId
           ? {
               ...activity,
-              startingTime:
-                Number(activity.startingTime) - Number(entry.usedTime),
+              startingAmount:
+                Number(activity.startingAmount) - Number(entry.usedAmount),
             }
           : activity
       )
@@ -138,7 +138,7 @@ const Home: React.FC = () => {
 
     setLogEntry((currentLoggedEntries) => ({
       ...currentLoggedEntries,
-      [activityId]: { usedTime: 0, date: "", description: "" },
+      [activityId]: { usedAmount: 0, date: "", description: "" },
     }));
   };
 
@@ -176,15 +176,15 @@ const Home: React.FC = () => {
         // then proceed to delete from array
         updatedLogs[activityId].splice(index, 1)[0];
 
-        //mapping over all activities, and if the current activity matches the index when deleting, set the value for the starting time by adding back the used time to the starting time
+        //mapping over all activities, and if the current activity matches the index when deleting, set the value for the starting amount by adding back the used amount to the starting amount
         setActivities((currentActivities) =>
           currentActivities.map((activity) =>
             activity.id === activityId
               ? {
                   ...activity,
-                  startingTime:
-                    Number(activity.startingTime) +
-                    Number(deletedEntry.usedTime),
+                  startingAmount:
+                    Number(activity.startingAmount) +
+                    Number(deletedEntry.usedAmount),
                 }
               : activity
           )
@@ -222,15 +222,6 @@ const Home: React.FC = () => {
           </InputGroup>
           <InputGroup className="mb-3">
             <Form.Control
-              type="number"
-              placeholder="Add Amount"
-              onChange={handleChangeActivity}
-              value={userInfo.startingTime || ""}
-              name="startingTime"
-            />
-          </InputGroup>
-          <InputGroup className="mb-3">
-            <Form.Control
               type="text"
               placeholder="What are you tracking?"
               onChange={handleChangeActivity}
@@ -238,7 +229,18 @@ const Home: React.FC = () => {
               name="tracker"
             />
           </InputGroup>
-          <p>How long do you wish to track this activity?</p>
+          <InputGroup className="mb-3">
+            <Form.Control
+              type="number"
+              placeholder="Add Amount"
+              onChange={handleChangeActivity}
+              value={userInfo.startingAmount || ""}
+              name="startingAmount"
+            />
+          </InputGroup>
+          {userInfo.activity && (
+            <p>When does your your activity, {userInfo.activity}, end?</p>
+          )}
           <InputGroup className="mb-3">
             <Form.Control
               type="date"
@@ -248,7 +250,7 @@ const Home: React.FC = () => {
               name="length"
             />
           </InputGroup>
-          {userInfo.activity && userInfo.startingTime > 0 && (
+          {userInfo.activity && userInfo.startingAmount > 0 && (
             <button className="addActivityBtn" onClick={handleAddActivity}>
               Add Activity
             </button>
@@ -269,18 +271,21 @@ const Home: React.FC = () => {
               className="panel-header"
               onClick={() => setOpenPanel(openPanel === index ? null : index)}
             >
-              {activity.activity} - {activity.startingTime} {activity.tracker}{" "}
+              {activity.activity} - {activity.startingAmount} {activity.tracker}{" "}
               left
-              <button
-                className="delete-activity-btn"
-                onClick={() => handleDeleteActivity(index)}
-              >
-                Delete {activity.activity}
-              </button>
             </div>
             {openPanel === index && (
               <div className="panel-body">
-                <h5>Log Time</h5>
+                <h5>Log Amount</h5>
+                <span className="log-length">
+                  Activity End Date: {activity.length}
+                </span>
+                <button
+                  className="delete-activity-btn"
+                  onClick={() => handleDeleteActivity(index)}
+                >
+                  Delete {activity.activity}
+                </button>
                 <InputGroup className="mb-2">
                   <Form.Control
                     placeholder="Date"
@@ -294,10 +299,10 @@ const Home: React.FC = () => {
                 </InputGroup>
                 <InputGroup className="mb-2">
                   <Form.Control
-                    placeholder="Time Used"
+                    placeholder={`Amount of ${activity.tracker} completed`}
                     type="number"
-                    name="usedTime"
-                    value={logEntry[activity.id]?.usedTime || ""}
+                    name="usedAmount"
+                    value={logEntry[activity.id]?.usedAmount || ""}
                     onChange={(e) =>
                       handleChangeLogActivityInfo(e, activity.id)
                     }
@@ -314,8 +319,8 @@ const Home: React.FC = () => {
                     }
                   />
                 </InputGroup>
-                <button onClick={() => handleLogTime(activity.id)}>
-                  Log Time
+                <button onClick={() => handleLogAmount(activity.id)}>
+                  Log Amount
                 </button>
 
                 <h5 className="mt-3">Logged Entries</h5>
@@ -324,10 +329,9 @@ const Home: React.FC = () => {
                     <ListGroup.Item key={logIndex} className="log-entry">
                       <div className="log-details">
                         <span className="log-date">{log.date}</span>
-                        <span className="log-time">{log.usedTime}</span>
-                        {tracker.map((track, index) => (
-                          <p key={index}>track.tracker</p>
-                        ))}
+                        <span className="log-amount">
+                          {log.usedAmount} Completed
+                        </span>
                       </div>
                       <p className="log-description">{log.description}</p>
                       <button
@@ -341,7 +345,7 @@ const Home: React.FC = () => {
                       </button>
                       {openOptions === logIndex && (
                         <>
-                          <button onClick={() => handleLogTime(activity.id)}>
+                          <button onClick={() => handleLogAmount(activity.id)}>
                             Edit
                           </button>
                           <button
