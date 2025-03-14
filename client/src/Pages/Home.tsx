@@ -53,6 +53,7 @@ const Home: React.FC = () => {
   );
 
   const [openPanel, setOpenPanel] = useState<number | null>(null);
+  const [openActivityForm, setOpenActivityForm] = useState(null);
   const [openOptions, setOpenOptions] = useState<number | null>(null);
 
   const [editActivity, setEditActivity] = useState<{ [key: number]: number }>(
@@ -210,52 +211,72 @@ const Home: React.FC = () => {
 
       <div className="container">
         {/* <h3 className="section-title">Add New Activity</h3> */}
-        <div className="activity-form">
-          <InputGroup className="mb-3">
-            <Form.Control
-              type="text"
-              placeholder="Add new activity"
-              onChange={handleChangeActivity}
-              value={userInfo.activity}
-              name="activity"
-            />
-          </InputGroup>
-          <InputGroup className="mb-3">
-            <Form.Control
-              type="text"
-              placeholder="What are you tracking?"
-              onChange={handleChangeActivity}
-              value={userInfo.tracker || ""}
-              name="tracker"
-            />
-          </InputGroup>
-          <InputGroup className="mb-3">
-            <Form.Control
-              type="number"
-              placeholder="Add Amount"
-              onChange={handleChangeActivity}
-              value={userInfo.startingAmount || ""}
-              name="startingAmount"
-            />
-          </InputGroup>
-          {userInfo.activity && (
-            <p>When does your your activity, {userInfo.activity}, end?</p>
-          )}
-          <InputGroup className="mb-3">
-            <Form.Control
-              type="date"
-              placeholder="Long long do you want to track this?"
-              onChange={handleChangeActivity}
-              value={userInfo.length || ""}
-              name="length"
-            />
-          </InputGroup>
-          {userInfo.activity && userInfo.startingAmount > 0 && (
-            <button className="addActivityBtn" onClick={handleAddActivity}>
-              Add Activity
+        {openActivityForm ? (
+          <div className="activity-form">
+            <InputGroup className="mb-3">
+              <Form.Control
+                type="text"
+                placeholder="Add new activity"
+                onChange={handleChangeActivity}
+                value={userInfo.activity}
+                name="activity"
+              />
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <Form.Control
+                type="text"
+                placeholder="What are you tracking?"
+                onChange={handleChangeActivity}
+                value={userInfo.tracker || ""}
+                name="tracker"
+              />
+            </InputGroup>
+            <InputGroup className="mb-3">
+              <Form.Control
+                type="number"
+                placeholder="Add Amount"
+                onChange={handleChangeActivity}
+                value={userInfo.startingAmount || ""}
+                name="startingAmount"
+              />
+            </InputGroup>
+            {userInfo.activity && (
+              <p>When does your your activity, {userInfo.activity}, end?</p>
+            )}
+            <InputGroup className="mb-3">
+              <Form.Control
+                type="date"
+                placeholder="Long long do you want to track this?"
+                onChange={handleChangeActivity}
+                value={userInfo.length || ""}
+                name="length"
+              />
+            </InputGroup>
+            {userInfo.activity && userInfo.startingAmount > 0 && (
+              <button
+                className="addActivityBtn"
+                onClick={() => {
+                  handleAddActivity(), setOpenActivityForm(!openActivityForm);
+                }}
+              >
+                Add Activity
+              </button>
+            )}
+            <button
+              className="closeActivityBtn"
+              onClick={() => setOpenActivityForm(!openActivityForm)}
+            >
+              Close
             </button>
-          )}
-        </div>
+          </div>
+        ) : (
+          <button
+            className="addActivityBtnForm"
+            onClick={() => setOpenActivityForm(!openActivityForm)}
+          >
+            Add Activity
+          </button>
+        )}
 
         {activities.length < 1 ? (
           <p className="section-title">

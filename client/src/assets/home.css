@@ -14,10 +14,6 @@
   text-transform: uppercase;
 }
 
-/* .addActivityBtn {
-  font-family: 'VT323', monospace;
-} */
-
 .delete-activity-btn {
   display: flex;
   float: right;
@@ -33,11 +29,54 @@
 }
 
 .activity-form {
+  position: fixed;
+  width: 94%;
+  max-width: 94%;
   padding: 10px;
   border: 2px solid #5a5a5a;
   background-color: #c0c0c0;
-  box-shadow: inset 2px 2px 0px #888;
+  box-shadow: inset 2px 2px 0px #888; 
 }
+
+.addActivityBtnForm {
+  position: fixed;
+  margin-left: 64%;
+  margin-top: 110%;
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  background-color: #dfdfdf;
+  color: black;
+  border: 2px solid #5a5a5a;
+  padding: 8px 12px;
+  box-shadow: 7px 7px 0px rgba(0, 0, 0, 0.539);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.addActivityBtn {
+  flex-direction: column;
+  /* border: 3px solid #5a5a5a;  */
+  background-color: #dfdfdf; 
+  color: black;
+  max-width: 600px;
+  /* margin: 40px auto; */
+  box-shadow: 4px 4px 0px #888; 
+}
+
+
+.closeActivityBtn {
+  color: red;
+  font-size: 14px;
+  margin-left: 80%;
+  background-color: #dfdfdf;
+  border: 2px solid #5a5a5a;
+  /* padding: 8px 12px; */
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+
 
 .activity-panel {
   font-family: 'VT323', monospace;
@@ -56,6 +95,8 @@
   font-weight: bold;
   border-bottom: 2px solid #5a5a5a;
 }
+
+
 
 .panel-header:hover {
   font-family: 'VT323', monospace;
