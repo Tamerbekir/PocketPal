@@ -8,7 +8,7 @@ body {
   text-align: center;
 }
 
-.container {
+/* .container {
   display: flex;
   flex-direction: column;
   border: 3px solid #5a5a5a; 
@@ -18,14 +18,31 @@ body {
   max-width: 600px;
   margin: 40px auto;
   box-shadow: 4px 4px 0px #888; 
+} */
+
+.todoForm {
+  margin-top: 10%;
+  border: 2px solid black;
+  position: fixed;
+  width: 90%;
+  background-color: #888;
 }
 
 .todoList {
-  font-size: 40px;
-  font-family: 'VT323', monospace;
+  margin-left: 64%;
+  margin-top: 128%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #5a5a5a; 
+  background-color: #dfdfdf; 
+  color: black;
+  max-width: 600px;
+  /* margin: 40px auto; */
+  box-shadow: 4px 4px 0px #888; 
 }
 
-.addBtn, .deleteBtn, .completeBtn {
+.addBtn, .deleteBtn, .completeBtn, .cancelBtn {
   font-family: 'VT323', monospace;
   font-size: 16px;
   background-color: #dfdfdf;
@@ -66,7 +83,8 @@ input::placeholder, textarea::placeholder {
 }
 
 .listDiv {
-  margin: auto;
+  /* margin: auto; */
+  margin-top: -10%;
   max-width: 800px;
   font-family: 'VT323', monospace;
   border: 3px solid #5a5a5a;
@@ -76,6 +94,7 @@ input::placeholder, textarea::placeholder {
 }
 
 .listDiv p {
+  margin-top: 2%;
   border-bottom: 2px solid black;
   font-size: 20px;
   color: black;

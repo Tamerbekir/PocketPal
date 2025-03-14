@@ -27,6 +27,7 @@ export default function Todo() {
 
   const [complete, setComplete] = useState<boolean | null>(null);
   const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
+  const [addTask, setAddTask] = useState<boolean>(false);
 
   const handleTodoChange = (event) => {
     const { name, value } = event.target;
@@ -35,6 +36,7 @@ export default function Todo() {
 
   const handleSubmitTodo = () => {
     setSubmitTodo([...submitTodo, todo]);
+    setTodo({ item: "", date: "", notes: "" });
   };
 
   // const handleCompletedTodos = (index: number) => {
@@ -60,54 +62,72 @@ export default function Todo() {
   return (
     <div>
       <div className="container">
-        <h1 className="todoList">To Do List</h1>
-        <p className="caughtUpText">
-          {submitTodo.length < 1 ? (
-            <p>Looks like you're all caught up!</p>
-          ) : (
-            <p>You have {submitTodo.length} tasks remaining</p>
-          )}
-        </p>
-        <InputGroup className="mb-3">
-          <FloatingLabel controlId="floatingTextarea2" label="Add an item">
-            <Form.Control
-              placeholder="To do"
-              type="text"
-              name="item"
-              value={todo.item}
-              onChange={handleTodoChange}
-              className="todoItem"
-              aria-describedby="basic-addon1"
-            />
-          </FloatingLabel>
-        </InputGroup>
-        <FloatingLabel controlId="floatingTextarea2" label="Note">
-          <Form.Control
-            as="textarea"
-            name="notes"
-            value={todo.notes}
-            onChange={handleTodoChange}
-            placeholder="Leave a comment here"
-            style={{ height: "100px" }}
-          />
-        </FloatingLabel>
-        <InputGroup className="mb-3">
-          <Form.Control
-            placeholder="To do"
-            type="date"
-            name="date"
-            value={todo.date}
-            onChange={handleTodoChange}
-            className="todoDate"
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-        <button className="addBtn" onClick={handleSubmitTodo}>
-          Add
-        </button>
+        {submitTodo.length < 1 ? (
+          ""
+        ) : (
+          <p>You have {submitTodo.length} tasks remaining</p>
+        )}
+        <h2 className="todoList" onClick={() => setAddTask(!addTask)}>
+          {addTask ? "Computing.." : "Start Task"}
+        </h2>
+        {addTask && (
+          <div className="todoForm">
+            <h2>
+              <p className="caughtUpText"></p>
+            </h2>
+            <InputGroup className="mb-3">
+              <FloatingLabel controlId="floatingTextarea2" label="Add an item">
+                <Form.Control
+                  placeholder="To do"
+                  type="text"
+                  name="item"
+                  value={todo.item}
+                  onChange={handleTodoChange}
+                  className="todoItem"
+                  aria-describedby="basic-addon1"
+                />
+              </FloatingLabel>
+            </InputGroup>
+            <FloatingLabel controlId="floatingTextarea2" label="Note">
+              <Form.Control
+                as="textarea"
+                name="notes"
+                value={todo.notes}
+                onChange={handleTodoChange}
+                placeholder="Leave a comment here"
+                style={{ height: "100px" }}
+              />
+            </FloatingLabel>
+            <InputGroup className="mb-3">
+              <Form.Control
+                placeholder="To do"
+                type="date"
+                name="date"
+                value={todo.date}
+                onChange={handleTodoChange}
+                className="todoDate"
+                aria-describedby="basic-addon1"
+              />
+            </InputGroup>
+            <button
+              className="addBtn"
+              onClick={() => {
+                handleSubmitTodo();
+                setAddTask(!addTask);
+              }}
+            >
+              Compute
+            </button>
+            <button className="cancelBtn" onClick={() => setAddTask(!addTask)}>
+              Cancel
+            </button>
+          </div>
+        )}
       </div>
       <div className="listDiv">
-        <h4>List</h4>
+        <h4>
+          {submitTodo.length < 1 ? "Nothing to do? Add a task below!" : "List"}
+        </h4>
         {submitTodo.map((addedItem, index) => (
           <div key={index}>
             <p>Complete by: {addedItem.date}</p>

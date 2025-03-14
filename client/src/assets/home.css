@@ -1,11 +1,6 @@
 .container {
   font-family: 'VT323', monospace;
   max-width: 800px;
-  margin: auto;
-  padding: 10px;
-  border: 3px solid #5a5a5a;
-  background-color: #dfdfdf;
-  box-shadow: 4px 4px 0px #888;
 }
 
 .section-title {
@@ -79,8 +74,8 @@
   background-color: #c0c0c0;
 }
 
-.log-date {
-}
+/* .log-date {
+} */
 
 .log-amount {
   display: flex;
