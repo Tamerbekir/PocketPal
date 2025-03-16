@@ -5,7 +5,9 @@ import InputGroup from "react-bootstrap/InputGroup";
 import DateTimePicker from "react-datetime-picker";
 import "../assets/todo.css";
 
-import "../assets/todo.css";
+import DeleteTodoBtn from "../Components/DeleteToDoBtn";
+import EditTodoBtn from "../Components/EditTodoBtn";
+import CompleteTodoBtn from "../Components/CompleteTodoBtn";
 
 export default function Todo() {
   interface Todo {
@@ -26,8 +28,13 @@ export default function Todo() {
   });
 
   const [complete, setComplete] = useState<boolean | null>(null);
-  const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
+  const [completedTodos, setCompletedTodos] = useState<Todo[]>(() => {
+    const savedDate = localStorage.getItem("completedTodos");
+    return savedDate ? JSON.parse(savedDate) : [];
+  });
+  const [successMessage, setSuccessMessage] = useState<boolean | null>(null);
   const [addTask, setAddTask] = useState<boolean>(false);
+  const [completeList, setCompleteList] = useState<boolean | null>(null);
 
   const handleTodoChange = (event) => {
     const { name, value } = event.target;
@@ -37,20 +44,43 @@ export default function Todo() {
   const handleSubmitTodo = () => {
     setSubmitTodo([...submitTodo, todo]);
     setTodo({ item: "", date: "", notes: "" });
+    setSuccessMessage(true);
+    setTimeout(() => setSuccessMessage(false), 3000);
   };
 
-  // const handleCompletedTodos = (index: number) => {
-  //   setSubmitTodo((previousState) =>
-  //     previousState.map((todo, completedItem) =>
-  //       completedItem === index ? { ...todo, completed: !completedItem.completed } : todo
-  //     )
-  //   );
-  //   console.log(todo.completed);
-  // };
+  const handleCompleteTodo = (index: number) => {
+    const allTodos = [...submitTodo];
+    const completeTodo = allTodos.splice(index, 1)[0];
+    if (completeTodo) {
+      setCompletedTodos([...completedTodos, completeTodo]);
+      setSubmitTodo(allTodos);
+    }
+    // console.log(completeTodo);
+  };
+
+  const handleUndoCompleteTodo = (index: number) => {
+    const allCompletedTodos = [...completedTodos];
+    const completedTodo = allCompletedTodos.splice(index, 1)[0];
+    if (completedTodo) {
+      setSubmitTodo([...submitTodo, completedTodo]);
+      setCompletedTodos(allCompletedTodos);
+    }
+    // console.log(completedTodo);
+  };
+
+  const handleClearTodo = (index: number) => {
+    const allCompletedTodos = [...completedTodos];
+    allCompletedTodos.splice(index, 1);
+    setCompletedTodos(allCompletedTodos);
+  };
+
+  const handleShowCompleteList = () => {
+    setCompleteList(!completeList);
+  };
 
   const handleDeleteTodo = (index: number) => {
     const updateTodo = [...submitTodo];
-    updateTodo.splice(index, 1)[0];
+    updateTodo.splice(index, 1);
     setSubmitTodo(updateTodo);
     console.log(updateTodo);
   };
@@ -59,17 +89,24 @@ export default function Todo() {
     localStorage.setItem("submitTodo", JSON.stringify(submitTodo));
   }, [submitTodo]);
 
+  useEffect(() => {
+    localStorage.setItem("completedTodos", JSON.stringify(completedTodos));
+  }, [completedTodos]);
+
   return (
     <div>
       <div className="container">
         {submitTodo.length < 1 ? (
           ""
         ) : (
-          <p>You have {submitTodo.length} tasks remaining</p>
+          <p className="remainingTasks">
+            You have {submitTodo.length} tasks remaining
+          </p>
         )}
         <h2 className="todoList" onClick={() => setAddTask(!addTask)}>
           {addTask ? "Computing.." : "Start Task"}
         </h2>
+        {successMessage && <p className="successMessage">Added!</p>}
         {addTask && (
           <div className="todoForm">
             <h2>
@@ -109,15 +146,17 @@ export default function Todo() {
                 aria-describedby="basic-addon1"
               />
             </InputGroup>
-            <button
-              className="addBtn"
-              onClick={() => {
-                handleSubmitTodo();
-                setAddTask(!addTask);
-              }}
-            >
-              Compute
-            </button>
+            {todo.item && (
+              <button
+                className="addBtn"
+                onClick={() => {
+                  handleSubmitTodo();
+                  setAddTask(!addTask);
+                }}
+              >
+                Compute
+              </button>
+            )}
             <button className="cancelBtn" onClick={() => setAddTask(!addTask)}>
               Cancel
             </button>
@@ -130,25 +169,49 @@ export default function Todo() {
         </h4>
         {submitTodo.map((addedItem, index) => (
           <div key={index}>
-            <p>Complete by: {addedItem.date}</p>
-            <p>To Do: {addedItem.item}</p>
-            <p>Notes: {addedItem.notes}</p>
+            {addedItem.date && <p>Complete by: {addedItem.date}</p>}
+            <p>{addedItem.item}</p>
+
+            {addedItem.notes && <p>{addedItem.notes}</p>}
+
             <div className="deleteBtnDiv">
-              <button
-                className="deleteBtn"
-                onClick={() => handleDeleteTodo(index)}
-              >
-                Delete
-              </button>
-              <button
-                className="completeBtn"
-                onClick={() => handleCompletedTodos(index)}
-              >
-                Complete
-              </button>
+              <DeleteTodoBtn
+                index={index}
+                handleDeleteTodo={handleDeleteTodo}
+              />
+              <CompleteTodoBtn
+                index={index}
+                handleCompleteTodo={handleCompleteTodo}
+              />
+              <EditTodoBtn index={index} handleEditTodo={handleDeleteTodo} />
             </div>
           </div>
         ))}
+        <p>Completed: {completedTodos.length}</p>
+
+        {completedTodos.length > 0 ? (
+          <button
+            className="completedListBtn"
+            onClick={() => handleShowCompleteList()}
+          >
+            {completeList || null ? "Close" : "Show Completed"}
+          </button>
+        ) : (
+          ""
+        )}
+        {completeList && (
+          <div>
+            {completedTodos.map((completedItems, index) => (
+              <div key={index}>
+                <p>{completedItems.item}</p>
+                <button onClick={() => handleClearTodo(index)}>Clear</button>
+                <button onClick={() => handleUndoCompleteTodo(index)}>
+                  Undo
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

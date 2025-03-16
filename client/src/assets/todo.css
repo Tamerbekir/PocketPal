@@ -28,6 +28,17 @@ body {
   background-color: #888;
 }
 
+.successMessage {
+  text-align: center;
+  font-size: 50px;
+  transition: all 0.5s ease-in-out
+}
+
+
+.remainingTasks {
+  font-size: 30px;
+}
+
 .todoList {
   margin-left: 64%;
   margin-top: 128%;
@@ -42,7 +53,7 @@ body {
   box-shadow: 4px 4px 0px #888; 
 }
 
-.addBtn, .deleteBtn, .completeBtn, .cancelBtn {
+.addBtn, .deleteBtn, .completeBtn, .cancelBtn, .editBtn, .completedListBtn {
   font-family: 'VT323', monospace;
   font-size: 16px;
   background-color: #dfdfdf;
