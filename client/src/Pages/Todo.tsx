@@ -146,6 +146,7 @@ export default function Todo() {
                 aria-describedby="basic-addon1"
               />
             </InputGroup>
+
             {todo.item && (
               <button
                 className="addBtn"
