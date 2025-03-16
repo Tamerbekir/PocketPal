@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../assets/todo.css";
 
 interface DeleteTodoBtnProp {
   index: number;
