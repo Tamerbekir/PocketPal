@@ -5,7 +5,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import DateTimePicker from "react-datetime-picker";
 import "../assets/todo.css";
 
-import DeleteTodoBtn from "../Components/DeleteToDoBtn";
+import DeleteTodoBtn from "../Components/DeleteTodoBtn";
 import EditTodoBtn from "../Components/EditTodoBtn";
 import CompleteTodoBtn from "../Components/CompleteTodoBtn";
 
