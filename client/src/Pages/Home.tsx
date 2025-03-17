@@ -152,7 +152,7 @@ const Home: React.FC = () => {
     if (confirmDelete) {
       setActivities((currentActivities) => {
         const currentActivitiesArray = [...currentActivities];
-        currentActivitiesArray.splice(index, 1)[0];
+        currentActivitiesArray.splice(index, 1);
         return currentActivitiesArray;
       });
     } else {
@@ -175,7 +175,7 @@ const Home: React.FC = () => {
         //copy array over
         updatedLogs[activityId] = [...updatedLogs[activityId]];
         // then proceed to delete from array
-        updatedLogs[activityId].splice(index, 1)[0];
+        updatedLogs[activityId].splice(index, 1);
 
         //mapping over all activities, and if the current activity matches the index when deleting, set the value for the starting amount by adding back the used amount to the starting amount
         setActivities((currentActivities) =>

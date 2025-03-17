@@ -53,6 +53,20 @@ body {
   box-shadow: 4px 4px 0px #888; 
 }
 
+.activeTodo {
+  font-size: 40px !important;
+  /* background-color: #fdffff; */
+}
+
+.nonActiveTodo {
+  list-style-type: circle;
+  font-size: 25px !important;
+}
+
+.todoText {
+  font-size: 23px !important;
+}
+
 .addBtn, .deleteBtn, .completeBtn, .cancelBtn, .editBtn, .completedListBtn {
   font-family: 'VT323', monospace;
   font-size: 16px;

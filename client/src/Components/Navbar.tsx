@@ -33,6 +33,7 @@ export default function Navbar() {
       {/* <Link to="calendar">Calendar</Link> */}
       <Link to="todo">To Do</Link>
       <Link to="settings">Settings</Link>
+      {/* <Link to="journal">Journal</Link> */}
       {/* <Link to="login">Login</Link> */}
       {/* taking the className theme we defined and using it here
       creating onClick to activate the toggle for theme

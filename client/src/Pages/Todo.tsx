@@ -27,7 +27,6 @@ export default function Todo() {
     return savedData ? JSON.parse(savedData) : [];
   });
 
-  const [complete, setComplete] = useState<boolean | null>(null);
   const [completedTodos, setCompletedTodos] = useState<Todo[]>(() => {
     const savedDate = localStorage.getItem("completedTodos");
     return savedDate ? JSON.parse(savedDate) : [];
@@ -35,6 +34,7 @@ export default function Todo() {
   const [successMessage, setSuccessMessage] = useState<boolean | null>(null);
   const [addTask, setAddTask] = useState<boolean>(false);
   const [completeList, setCompleteList] = useState<boolean | null>(null);
+  const [openTodo, setOpenTodo] = useState<number | null>(null);
 
   const handleTodoChange = (event) => {
     const { name, value } = event.target;
@@ -85,6 +85,11 @@ export default function Todo() {
     console.log(updateTodo);
   };
 
+  // Begin edit
+  // create useState
+  // spread submittodo
+  // update state
+
   useEffect(() => {
     localStorage.setItem("submitTodo", JSON.stringify(submitTodo));
   }, [submitTodo]);
@@ -96,9 +101,7 @@ export default function Todo() {
   return (
     <div>
       <div className="container">
-        {submitTodo.length < 1 ? (
-          ""
-        ) : (
+        {submitTodo.length > 0 && (
           <p className="remainingTasks">
             You have {submitTodo.length} tasks remaining
           </p>
@@ -169,34 +172,53 @@ export default function Todo() {
           {submitTodo.length < 1 ? "Nothing to do? Add a task below!" : "List"}
         </h4>
         {submitTodo.map((addedItem, index) => (
-          <div key={index}>
-            {addedItem.date && <p>Complete by: {addedItem.date}</p>}
-            <p>{addedItem.item}</p>
-
-            {addedItem.notes && <p>{addedItem.notes}</p>}
-
-            <div className="deleteBtnDiv">
-              <DeleteTodoBtn
-                index={index}
-                handleDeleteTodo={handleDeleteTodo}
-              />
-              <CompleteTodoBtn
-                index={index}
-                handleCompleteTodo={handleCompleteTodo}
-              />
-              <EditTodoBtn index={index} handleEditTodo={handleDeleteTodo} />
-            </div>
+          <div
+            key={index}
+            onClick={() => setOpenTodo(openTodo === index ? null : index)}
+          >
+            {openTodo !== index && (
+              <ul>
+                <li className="nonActiveTodo">{addedItem.item}</li>
+              </ul>
+            )}
+            {openTodo === index && (
+              <div>
+                <p className="activeTodo">{addedItem.item}</p>
+                {addedItem.date && (
+                  <p className="todoText">Complete by: {addedItem.date}</p>
+                )}
+                {addedItem.notes && (
+                  <p className="todoText">{addedItem.notes}</p>
+                )}
+                <div className="deleteBtnDiv">
+                  <DeleteTodoBtn
+                    index={index}
+                    handleDeleteTodo={handleDeleteTodo}
+                  />
+                  <CompleteTodoBtn
+                    index={index}
+                    handleCompleteTodo={handleCompleteTodo}
+                  />
+                  {/* <EditTodoBtn
+                    index={index}
+                    handleEditTodo={handleDeleteTodo}
+                  /> */}
+                </div>
+              </div>
+            )}
           </div>
         ))}
-        <p>Completed: {completedTodos.length}</p>
 
         {completedTodos.length > 0 ? (
-          <button
-            className="completedListBtn"
-            onClick={() => handleShowCompleteList()}
-          >
-            {completeList || null ? "Close" : "Show Completed"}
-          </button>
+          <div>
+            <p>Completed: {completedTodos.length}</p>
+            <button
+              className="completedListBtn"
+              onClick={() => handleShowCompleteList()}
+            >
+              {completeList || null ? "Close" : "Show Completed"}
+            </button>
+          </div>
         ) : (
           ""
         )}
