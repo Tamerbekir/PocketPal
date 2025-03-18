@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import ListGroup from "react-bootstrap/ListGroup";
+import UserCalendar from "../Components/UserCalendar";
 import "../assets/home.css";
 
 interface UserInfo {
@@ -387,6 +388,9 @@ const Home: React.FC = () => {
           </div>
         ))}
       </div>
+      <>
+        <UserCalendar />
+      </>
     </>
   );
 };

@@ -41,7 +41,7 @@ body {
 
 .todoList {
   margin-left: 64%;
-  margin-top: 128%;
+  margin-top: 110%;
   position: fixed;
   display: flex;
   flex-direction: column;
