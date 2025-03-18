@@ -56,7 +56,6 @@ const Home: React.FC = () => {
   const [openPanel, setOpenPanel] = useState<number | null>(null);
   const [openActivityForm, setOpenActivityForm] = useState(null);
   const [openOptions, setOpenOptions] = useState<number | null>(null);
-
   const [editActivity, setEditActivity] = useState<{ [key: number]: number }>(
     {}
   );
