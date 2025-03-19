@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React from "react";
 import "./assets/navbar.css";
 import { useState, useEffect } from "react";
+import todoImg from "../assets/images/todoListIcon.webp";
 
 export default function Navbar() {
   //Set the theme useState to be either light or dark but set the page to load as as dark for useState
@@ -30,10 +31,14 @@ export default function Navbar() {
 
   return (
     <nav className="navDiv">
-      <Link to="/">Activities</Link>
+      <Link to="/">Desktop</Link>
+      {/* <Link to="/activities">Activities</Link> */}
       {/* <Link to="calendar">Calendar</Link> */}
-      <Link to="todo">To Do</Link>
-      <Link to="settings">Settings</Link>
+      {/* <Link to="todo">
+        {" "}
+        <img src={todoImg} alt="" className="todoImgIcon" />
+      </Link> */}
+      {/* <Link to="settings">Settings</Link> */}
       {/* <Link to="journal">Journal</Link> */}
       {/* <Link to="login">Login</Link> */}
       {/* taking the className theme we defined and using it here

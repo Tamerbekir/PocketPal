@@ -13,7 +13,9 @@ nav {
 }
 
 
-
+.todoImgIcon {
+  width: 80px;
+}
 
 nav a {
   padding: 10px 15px;

@@ -40,9 +40,8 @@ export default function Journal() {
   return (
     <div>
       <InputGroup className="mb-3">
-        <Form.Control
+        <textarea
           className="journalInput"
-          type="text"
           onChange={(e) => handleJournalChange(e)}
           value={journalEntry.entry || ""}
           name="entry"
