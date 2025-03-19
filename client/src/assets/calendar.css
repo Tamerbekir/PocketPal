@@ -18,9 +18,10 @@
   font-family: 'VT323', monospace;
 }
 
-/* .openCalenderHeader {
-
-} */
+.openCalenderHeader {
+  position: fixed;
+  top: 90%;
+}
 
 .react-calendar {
   font-family: 'VT323', monospace;

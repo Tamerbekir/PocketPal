@@ -207,8 +207,6 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <h1 className="header">Pocket Pal</h1>
-
       <div className="container">
         {/* <h3 className="section-title">Add New Activity</h3> */}
         {openActivityForm ? (

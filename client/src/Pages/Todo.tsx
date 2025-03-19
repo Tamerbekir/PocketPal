@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import InputGroup from "react-bootstrap/InputGroup";
-import DateTimePicker from "react-datetime-picker";
 import "../assets/todo.css";
 
 import DeleteTodoBtn from "../Components/DeleteTodoBtn";

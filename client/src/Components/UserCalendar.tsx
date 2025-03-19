@@ -33,10 +33,10 @@ export default function UserCalendar({ isVisible }) {
           zIndex: 1,
         }}
       >
+        {openCalender && <Calendar onChange={onChange} value={value} />}
         <h1 onClick={handleCalendarOpen} className="openCalenderHeader">
           {openCalender ? "Close" : "Calendar"}
         </h1>
-        {openCalender && <Calendar onChange={onChange} value={value} />}
       </motion.div>
     </div>
   );
