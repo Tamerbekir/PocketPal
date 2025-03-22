@@ -13,7 +13,21 @@ export default defineConfig({
         "@fortawesome/react-fontawesome/index.es.js",
     },
   },
+  optimizeDeps: {
+    include: [
+      "@fortawesome/fontawesome-svg-core",
+      "@fortawesome/free-solid-svg-icons",
+      "@fortawesome/react-fontawesome",
+    ],
+  },
   build: {
+    rollupOptions: {
+      external: [
+        "@fortawesome/fontawesome-svg-core",
+        "@fortawesome/free-solid-svg-icons",
+        "@fortawesome/react-fontawesome",
+      ],
+    },
     outDir: "../dist",
     emptyOutDir: true,
   },
