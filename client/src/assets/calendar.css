@@ -14,7 +14,14 @@
   margin: 0 auto;
 }
 
+
+.calendarIcon {
+  width: 80px;
+  z-index: 1;
+}
 .calendarDiv {
+  /* position: fixed; */
+  margin-top: 100% !important;
   font-family: 'VT323', monospace;
 }
 

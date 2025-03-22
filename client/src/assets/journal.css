@@ -1,5 +1,67 @@
-.journalInput {
-  height: 200px;
+
+.journalContainer {
+  width: 400px;
+  background-color: #c0c0c0;
+  border: 3px solid black;
+  padding: 10px;
+  box-shadow: 4px 4px black;
+}
+
+.journalInput, .dateInput {
   width: 100%;
-  white-space: pre-wrap;
+  padding: 5px;
+  font-size: 14px;
+  border: 2px inset #808080;
+  background-color: white;
+  color: black;
+}
+
+button {
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 14px;
+  background: #c0c0c0;
+  border: 2px outset #ffffff;
+  padding: 5px 10px;
+  cursor: pointer;
+  box-shadow: 2px 2px black;
+}
+
+button:active {
+  border: 2px inset #ffffff;
+  box-shadow: none;
+}
+
+.entryContainer {
+  background: white;
+  border: 2px solid black;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.entryContainer p {
+  margin: 5px 0;
+}
+
+.entryContainer button {
+  background: #c0c0c0;
+  border: 2px outset #ffffff;
+  padding: 3px 6px;
+}
+
+.entryContainer button:active {
+  border: 2px inset #ffffff;
+  box-shadow: none;
+}
+
+.windowHeader {
+  background: #000080;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+}
+
+.windowBody {
+  padding: 10px;
 }
