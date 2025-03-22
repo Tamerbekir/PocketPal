@@ -34,14 +34,14 @@ export default function Home() {
           zIndex: 1,
         }}
       >
-        <Link>
+        <p>
           <img
             src={todoImg}
             alt=""
             className="todoListIcon"
             onClick={() => setOpenTodoWindow(!openTodoWindow)}
           />
-        </Link>
+        </p>
       </motion.div>
       <motion.div
         drag
@@ -56,14 +56,14 @@ export default function Home() {
           zIndex: 1,
         }}
       >
-        <Link>
+        <p>
           <img
             src={activitiesIcon}
             alt=""
             className="todoListIcon"
             onClick={() => setOpenActivitiesWindow(!openActivitiesWindow)}
           />
-        </Link>
+        </p>
       </motion.div>
       <motion.div
         drag
@@ -95,14 +95,14 @@ export default function Home() {
           zIndex: 1,
         }}
       >
-        <Link>
+        <p>
           <img
             src={journalIcon}
             alt=""
             className="todoListIcon"
             onClick={() => setOpenJournalWindow(!openJournalWindow)}
           />
-        </Link>
+        </p>
       </motion.div>
       <motion.div
         drag
@@ -122,15 +122,11 @@ export default function Home() {
             <>
               <Todo />
             </>
-            <button
-              className="viewFullScreenActivitiesBtn"
-              onClick={() => (window.location.href = "/todo")}
-            >
+            <Link to="/todo" className="viewFullTodoBtn">
               Expand
-              {/* <OpenInFullIcon /> */}
-            </button>
+            </Link>
             <button
-              className="closeActivitiesScreenBtn"
+              className="closeTodoScreenBtn"
               onClick={() => setOpenTodoWindow(!openTodoWindow)}
             >
               X{/* <CloseIcon /> */}
@@ -155,13 +151,9 @@ export default function Home() {
           <>
             <Activities />
             <>
-              <button
-                className="viewFullScreenActivitiesBtn"
-                onClick={() => (window.location.href = "/activities")}
-              >
-                {/* <OpenInFullIcon /> */}
+              <Link to="/activities" className="viewFullScreenActivitiesBtn">
                 Expand
-              </button>
+              </Link>
               <button
                 className="closeActivitiesScreenBtn"
                 onClick={() => setOpenActivitiesWindow(!openActivitiesWindow)}
