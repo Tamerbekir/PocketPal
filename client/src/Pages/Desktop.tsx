@@ -5,11 +5,8 @@ import activitiesIcon from "../assets/images/activitiesIcon.webp";
 import journalIcon from "../assets/images/journalIcon.webp";
 import settingsIcon from "../assets/images/settingsIcon.webp";
 import { motion } from "framer-motion";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExpand, faXmark } from "@fortawesome/free-solid-svg-icons";
-
-library.add(faExpand, faXmark);
+import OpenInFullIcon from "@mui/icons-material/OpenInFull";
+import CloseIcon from "@mui/icons-material/Close";
 
 import Todo from "./Todo";
 import Activities from "./Activities";
@@ -129,13 +126,14 @@ export default function Home() {
               className="viewFullScreenActivitiesBtn"
               onClick={() => (window.location.href = "/todo")}
             >
-              <FontAwesomeIcon icon={faExpand} />
+              <OpenInFullIcon />
+              {/* <FontAwesomeIcon icon={faExpand} /> */}
             </button>
             <button
               className="closeActivitiesScreenBtn"
               onClick={() => setOpenTodoWindow(!openTodoWindow)}
             >
-              <FontAwesomeIcon icon={faXmark} />
+              <CloseIcon />
             </button>
           </>
         )}
@@ -161,13 +159,13 @@ export default function Home() {
                 className="viewFullScreenActivitiesBtn"
                 onClick={() => (window.location.href = "/activities")}
               >
-                <FontAwesomeIcon icon={faExpand} />
+                <OpenInFullIcon />
               </button>
               <button
                 className="closeActivitiesScreenBtn"
                 onClick={() => setOpenActivitiesWindow(!openActivitiesWindow)}
               >
-                <FontAwesomeIcon icon={faXmark} />
+                <CloseIcon />
               </button>
             </>
           </>
