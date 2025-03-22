@@ -5,8 +5,8 @@ import activitiesIcon from "../assets/images/activitiesIcon.webp";
 import journalIcon from "../assets/images/journalIcon.webp";
 import settingsIcon from "../assets/images/settingsIcon.webp";
 import { motion } from "framer-motion";
-import OpenInFullIcon from "@mui/icons-material/OpenInFull";
-import CloseIcon from "@mui/icons-material/Close";
+// import OpenInFullIcon from "@mui/icons-material/OpenInFull";
+// import CloseIcon from "@mui/icons-material/Close";
 
 import Todo from "./Todo";
 import Activities from "./Activities";
@@ -126,14 +126,14 @@ export default function Home() {
               className="viewFullScreenActivitiesBtn"
               onClick={() => (window.location.href = "/todo")}
             >
-              <OpenInFullIcon />
-              {/* <FontAwesomeIcon icon={faExpand} /> */}
+              Expand
+              {/* <OpenInFullIcon /> */}
             </button>
             <button
               className="closeActivitiesScreenBtn"
               onClick={() => setOpenTodoWindow(!openTodoWindow)}
             >
-              <CloseIcon />
+              X{/* <CloseIcon /> */}
             </button>
           </>
         )}
@@ -159,13 +159,14 @@ export default function Home() {
                 className="viewFullScreenActivitiesBtn"
                 onClick={() => (window.location.href = "/activities")}
               >
-                <OpenInFullIcon />
+                {/* <OpenInFullIcon /> */}
+                Expand
               </button>
               <button
                 className="closeActivitiesScreenBtn"
                 onClick={() => setOpenActivitiesWindow(!openActivitiesWindow)}
               >
-                <CloseIcon />
+                X{/* <CloseIcon /> */}
               </button>
             </>
           </>

@@ -7,26 +7,6 @@ export default defineConfig({
       jsxRuntime: "automatic",
     }),
   ],
-  optimizeDeps: {
-    include: [
-      "@mui/material",
-      "@mui/icons-material",
-      "@emotion/react",
-      "@emotion/styled",
-    ],
-  },
-  build: {
-    rollupOptions: {
-      external: [
-        "@mui/material",
-        "@mui/icons-material",
-        "@emotion/react",
-        "@emotion/styled",
-      ],
-    },
-    outDir: "../dist",
-    emptyOutDir: true,
-  },
   server: {
     host: "0.0.0.0",
     port: 3001,
