@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
-import { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import "../assets/settings.css";
 const Settings = () => {
   interface UserInfo {
@@ -60,7 +60,7 @@ const Settings = () => {
           </>
         ) : (
           <>
-            {/* <Form.Label htmlFor="basic-url">Name</Form.Label>
+            <Form.Label htmlFor="basic-url">Name</Form.Label>
             <InputGroup className="mb-3 settingsInput">
               <Form.Control
                 id="basic-url"
@@ -69,7 +69,7 @@ const Settings = () => {
                 value={userInfo.name}
                 name="name"
               />
-            </InputGroup> */}
+            </InputGroup>
             <Form.Label htmlFor="basic-url">Notes</Form.Label>
             <Form.Label className="mb-3 settingsInput">
               <textarea

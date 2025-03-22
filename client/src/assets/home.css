@@ -1,6 +1,9 @@
 .container {
+  border-top: 15px solid rgba(0, 9, 180);
   font-family: 'VT323', monospace;
   max-width: 800px;
+  background-color: #e2dede;
+  box-shadow: 10px 10px 2px 0px;
 }
 
 .section-title {
@@ -8,7 +11,7 @@
   font-family: 'VT323', monospace;
   margin: 5%;
   font-size: 25px;
-  /* background-color: #bdbdbd; */
+  /* background-color: #bdbdbd; addActivityBtnForm*/
   padding: 8px;
   border-bottom: 2px solid #5a5a5a;
   text-transform: uppercase;
@@ -40,7 +43,7 @@
 }
 
 .addActivityBtnForm {
-  position: fixed;
+  /* position: fixed; */
   left: 64%;
   bottom: 13%;
   font-family: 'VT323', monospace;
@@ -49,7 +52,43 @@
   color: black;
   border: 2px solid #5a5a5a;
   padding: 8px 12px;
-  box-shadow: 7px 7px 0px rgba(0, 0, 0, 0.539);
+  margin-bottom: 5%;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.539);
+  text-transform: uppercase;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  z-index: 2;
+}
+
+.viewFullScreenActivitiesBtn {
+  position: absolute;
+  top: 0%;
+  right: 15%;
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  background-color: #dfdfdf;
+  color: black;
+  border: 2px solid #5a5a5a;
+  padding: 8px 12px;
+  margin-top: 5%;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.539);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  z-index: 2;
+}
+
+.closeActivitiesScreenBtn {
+  position: absolute;
+  top: 0%;
+  right: 2%;
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  background-color: #dfdfdf;
+  color: black;
+  border: 2px solid #5a5a5a;
+  padding: 8px 12px;
+  margin-top: 5%;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.539);
   cursor: pointer;
   text-transform: uppercase;
   transition: background-color 0.2s, box-shadow 0.2s;
@@ -58,11 +97,9 @@
 
 .addActivityBtn {
   flex-direction: column;
-  /* border: 3px solid #5a5a5a;  */
   background-color: #dfdfdf; 
   color: black;
   max-width: 600px;
-  /* margin: 40px auto; */
   box-shadow: 4px 4px 0px #888; 
 }
 
