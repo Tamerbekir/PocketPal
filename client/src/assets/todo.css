@@ -1,24 +1,15 @@
 /* General Retro Aesthetic */
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-body {
-  font-family: 'VT323', monospace;
-  background-color: #c0c0c0; 
-  color: black;
-  text-align: center;
-}
 
-/* .container {
-  display: flex;
-  flex-direction: column;
-  border: 3px solid #5a5a5a; 
-  background-color: #dfdfdf; 
-  color: black;
-  padding: 20px;
-  max-width: 600px;
-  margin: 40px auto;
-  box-shadow: 4px 4px 0px #888; 
-} */
+
+.containerTodo {
+  border-top: 15px solid rgba(0, 9, 180);
+  font-family: 'VT323', monospace;
+  max-width: 800px;
+  background-color: #e2dede;
+  box-shadow: 10px 10px 2px 0px;
+}
 
 .todoForm {
   margin-top: 10%;
@@ -28,6 +19,16 @@ body {
   background-color: #888;
 }
 
+.nothingToDoText {
+  margin-top: 5%;
+}
+
+.startTaskBtn {
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.539);
+  text-transform: uppercase;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
 .successMessage {
   text-align: center;
   font-size: 50px;
@@ -35,9 +36,11 @@ body {
 }
 
 
-.remainingTasks {
+.remainingTasksText {
   font-size: 30px;
 }
+
+
 
 .todoList {
   margin-left: 64%;
@@ -109,19 +112,15 @@ input::placeholder, textarea::placeholder {
 
 .listDiv {
   /* margin: auto; */
-  margin-top: -10%;
   max-width: 800px;
   font-family: 'VT323', monospace;
-  border: 3px solid #5a5a5a;
-  background-color: rgba(255, 255, 255, 0.722);
-  padding: 10px;
-  box-shadow: 3px 3px 0px #888;
+  padding: 6px;
 }
 
 .listDiv p {
-  margin-top: 2%;
-  border-bottom: 2px solid black;
-  font-size: 20px;
+  /* margin-top: 15%; */
+  /* border-bottom: 2px solid black; */
+  font-size: 30px;
   color: black;
 }
 

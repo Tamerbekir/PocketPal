@@ -98,22 +98,18 @@ export default function Todo() {
   }, [completedTodos]);
 
   return (
-    <div>
-      <div className="container">
-        {submitTodo.length > 0 && (
-          <p className="remainingTasks">
-            You have {submitTodo.length} tasks remaining
+    <div className="containerTodo">
+      <div>
+        <div className="remainingTasksDiv">
+          <p className="remainingTasksText">
+            {submitTodo.length > 0 && (
+              <p>{submitTodo.length} remaining tasks</p>
+            )}
           </p>
-        )}
-        <h2 className="todoList" onClick={() => setAddTask(!addTask)}>
-          {addTask ? "Computing.." : "Start Task"}
-        </h2>
-        {successMessage && <p className="successMessage">Added!</p>}
+        </div>
+
         {addTask && (
           <div className="todoForm">
-            <h2>
-              <p className="caughtUpText"></p>
-            </h2>
             <InputGroup className="mb-3">
               <FloatingLabel controlId="floatingTextarea2" label="Add an item">
                 <Form.Control
@@ -157,7 +153,7 @@ export default function Todo() {
                   setAddTask(!addTask);
                 }}
               >
-                Compute
+                Add
               </button>
             )}
             <button className="cancelBtn" onClick={() => setAddTask(!addTask)}>
@@ -167,9 +163,10 @@ export default function Todo() {
         )}
       </div>
       <div className="listDiv">
-        <h4>
-          {submitTodo.length < 1 ? "Nothing to do? Add a task below!" : "List"}
+        <h4 className="nothingToDoText">
+          {submitTodo.length < 1 && <p>No tasks</p>}
         </h4>
+
         {submitTodo.map((addedItem, index) => (
           <div
             key={index}
@@ -225,7 +222,7 @@ export default function Todo() {
           <div>
             {completedTodos.map((completedItems, index) => (
               <div key={index}>
-                <p>{completedItems.item}</p>
+                <p style={{ color: "green" }}>{completedItems.item}</p>
                 <button onClick={() => handleClearTodo(index)}>Clear</button>
                 <button onClick={() => handleUndoCompleteTodo(index)}>
                   Undo
@@ -234,6 +231,9 @@ export default function Todo() {
             ))}
           </div>
         )}
+        <button className="startTaskBtn" onClick={() => setAddTask(!addTask)}>
+          {addTask ? "Computing.." : "Start Task"}
+        </button>
       </div>
     </div>
   );

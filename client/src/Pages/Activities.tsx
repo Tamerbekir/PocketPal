@@ -209,7 +209,7 @@ const Home: React.FC = () => {
     <>
       <div className="container">
         {/* <h3 className="section-title">Add New Activity</h3> */}
-        {openActivityForm ? (
+        {openActivityForm && (
           <div className="activity-form">
             <InputGroup className="mb-3">
               <Form.Control
@@ -267,21 +267,32 @@ const Home: React.FC = () => {
               Close
             </button>
           </div>
-        ) : (
-          <button
-            className="addActivityBtnForm"
-            onClick={() => setOpenActivityForm(!openActivityForm)}
-          >
-            Add Activity
-          </button>
         )}
 
         {activities.length < 1 ? (
-          <p className="section-title">
-            Seems like you don't have any activities yet...
-          </p>
+          <>
+            <p className="section-title">
+              Seems like you don't have any activities yet...
+            </p>
+            <>
+              <button
+                className="addActivityBtnForm"
+                onClick={() => setOpenActivityForm(!openActivityForm)}
+              >
+                Add Activity
+              </button>
+            </>
+          </>
         ) : (
-          <h3 className="section-title">Activities</h3>
+          <>
+            <h3 className="section-title">Activities</h3>
+            <button
+              className="addActivityBtnForm"
+              onClick={() => setOpenActivityForm(!openActivityForm)}
+            >
+              New Activity
+            </button>
+          </>
         )}
 
         {activities.map((activity, index) => (
@@ -385,9 +396,7 @@ const Home: React.FC = () => {
           </div>
         ))}
       </div>
-      <>
-        <UserCalendar />
-      </>
+      <>{/* <UserCalendar /> */}</>
     </>
   );
 };
