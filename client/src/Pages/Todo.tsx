@@ -170,6 +170,7 @@ export default function Todo() {
         {submitTodo.map((addedItem, index) => (
           <div
             key={index}
+            // checks if the clicked item is not the currently open item (openTodo === index). If it is, it sets openTodo to null, and closes all index execpt for the index that is equal to the openTodo
             onClick={() => setOpenTodo(openTodo === index ? null : index)}
           >
             {openTodo !== index && (
