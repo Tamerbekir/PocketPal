@@ -5,8 +5,11 @@ import activitiesIcon from "../assets/images/activitiesIcon.webp";
 import journalIcon from "../assets/images/journalIcon.webp";
 import settingsIcon from "../assets/images/settingsIcon.webp";
 import { motion } from "framer-motion";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faExpand } from "@fortawesome/free-solid-svg-icons";
+import { faExpand, faXmark } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faExpand, faXmark);
 
 import Todo from "./Todo";
 import Activities from "./Activities";
