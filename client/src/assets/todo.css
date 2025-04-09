@@ -14,7 +14,7 @@
 .todoForm {
   margin-top: 10%;
   border: 2px solid black;
-  position: fixed;
+  /* position: fixed; */
   width: 90%;
   background-color: #888;
 }
@@ -45,7 +45,7 @@
 .todoList {
   margin-left: 64%;
   margin-top: 110%;
-  position: fixed;
+  /* position: fixed; */
   display: flex;
   flex-direction: column;
   border: 3px solid #5a5a5a; 
@@ -115,6 +115,7 @@ input::placeholder, textarea::placeholder {
   max-width: 800px;
   font-family: 'VT323', monospace;
   padding: 6px;
+  z-index: -9;
 }
 
 .listDiv p {
