@@ -6,13 +6,13 @@ import todoImg from "../assets/images/todoListIcon.webp";
 
 export default function Navbar() {
   //Set the theme useState to be either light or dark but set the page to load as as dark for useState
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  // const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   // use effect that takes in the body of the document and makes the className 'theme'
-  useEffect(() => {
-    document.body.className = theme;
-    console.log(document.body.className);
-  }, [theme]);
+  // useEffect(() => {
+  //   document.body.className = theme;
+  //   console.log(document.body.className);
+  // }, [theme]);
 
   //!a longer way of writing function will delete if all works
   // const handleTheme = () => {

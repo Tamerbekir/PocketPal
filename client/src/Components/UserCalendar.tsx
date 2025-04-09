@@ -21,23 +21,7 @@ export default function UserCalendar({ isVisible }) {
 
   return (
     <div className="calendarDiv">
-      <motion.div
-        drag
-        dragConstraints={{ left: 0, right: 0, top: -150, bottom: 400 }}
-        whileDrag={{ scale: 1.05 }}
-        transition={{ type: "spring", stiffness: 5, damping: 10 }}
-        style={{
-          width: "100%",
-          position: "absolute",
-          top: 150,
-          zIndex: 1,
-        }}
-      >
-        {openCalender && <Calendar onChange={onChange} value={value} />}
-        <h1 onClick={handleCalendarOpen} className="openCalenderHeader">
-          {openCalender ? "Close" : "Calendar"}
-        </h1>
-      </motion.div>
+      <Calendar onChange={onChange} value={value} />
     </div>
   );
 }

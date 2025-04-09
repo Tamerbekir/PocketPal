@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import React, { BrowserRouter } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";

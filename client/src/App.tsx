@@ -19,6 +19,7 @@ function App() {
       <Route path="signup" element={<SignUp />} />
       <Route path="todo" element={<Todo />} />
       <Route path="journal" element={<Journal />} />
+      <Route path="userCalendar" element={<UserCalendar />} />
     </Routes>
   );
 }
