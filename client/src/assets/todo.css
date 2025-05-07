@@ -1,26 +1,26 @@
-/* General Retro Aesthetic */
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
-
 
 .containerTodo {
   border-top: 15px solid rgba(0, 9, 180);
   font-family: 'VT323', monospace;
   max-width: 800px;
   background-color: #e2dede;
-  box-shadow: 10px 10px 2px 0px;
+  /* box-shadow: 10px 10px 2px 0px; */
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .todoForm {
   margin-top: 10%;
   border: 2px solid black;
-  /* position: fixed; */
   width: 90%;
   background-color: #888;
+  padding: 10px;
 }
 
 .nothingToDoText {
   margin-top: 5%;
+  text-align: center;
 }
 
 .startTaskBtn {
@@ -32,33 +32,28 @@
 .successMessage {
   text-align: center;
   font-size: 50px;
-  transition: all 0.5s ease-in-out
+  transition: all 0.5s ease-in-out;
 }
-
 
 .remainingTasksText {
   font-size: 30px;
+  text-align: center;
 }
 
-
-
 .todoList {
-  margin-left: 64%;
-  margin-top: 110%;
-  /* position: fixed; */
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
-  border: 3px solid #5a5a5a; 
-  background-color: #dfdfdf; 
+  border: 3px solid #5a5a5a;
+  background-color: #dfdfdf;
   color: black;
   max-width: 600px;
-  /* margin: 40px auto; */
-  box-shadow: 4px 4px 0px #888; 
+  box-shadow: 4px 4px 0px #888;
+  padding: 10px;
 }
 
 .activeTodo {
   font-size: 40px !important;
-  /* background-color: #fdffff; */
 }
 
 .nonActiveTodo {
@@ -103,6 +98,7 @@
 .caughtUpText {
   font-family: 'VT323', monospace;
   font-size: 20px;
+  text-align: center;
 }
 
 input::placeholder, textarea::placeholder {
@@ -111,16 +107,13 @@ input::placeholder, textarea::placeholder {
 }
 
 .listDiv {
-  /* margin: auto; */
   max-width: 800px;
   font-family: 'VT323', monospace;
   padding: 6px;
-  z-index: -9;
+  margin: 0 auto;
 }
 
 .listDiv p {
-  /* margin-top: 15%; */
-  /* border-bottom: 2px solid black; */
   font-size: 30px;
   color: black;
 }
@@ -135,4 +128,61 @@ input::placeholder, textarea::placeholder {
   font-family: 'VT323', monospace;
   margin: 5px;
   background-color: #dfdfdf;
+}
+
+@media (max-width: 768px) {
+  .containerTodo {
+    padding: 10px;
+  }
+
+  .todoForm {
+    width: 100%;
+    margin-top: 5%;
+  }
+
+  .successMessage {
+    font-size: 30px;
+  }
+
+  .remainingTasksText {
+    font-size: 20px;
+  }
+
+  .todoList {
+    max-width: 100%;
+    padding: 5px;
+  }
+
+  .activeTodo {
+    font-size: 30px !important;
+  }
+
+  .nonActiveTodo {
+    font-size: 20px !important;
+  }
+
+  .todoText {
+    font-size: 18px !important;
+  }
+
+  .addBtn, .deleteBtn, .completeBtn, .cancelBtn, .editBtn, .completedListBtn {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .todoItem, .todoNotes, .todoDate {
+    font-size: 20px;
+  }
+
+  .caughtUpText {
+    font-size: 16px;
+  }
+
+  .listDiv p {
+    font-size: 20px;
+  }
+
+  .todoList {
+    margin-top: 40px;
+  }
 }

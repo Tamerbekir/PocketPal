@@ -3,7 +3,8 @@
   font-family: 'VT323', monospace;
   max-width: 800px;
   background-color: #e2dede;
-  box-shadow: 10px 10px 2px 0px;
+  /* box-shadow: 10px 10px 2px 0px; */
+  border: 5px solid rgb(0, 49, 156)
 }
 
 .section-title {
@@ -62,7 +63,7 @@
 .viewFullScreenActivitiesBtn, .viewFullTodoBtn {
   position: absolute;
   top: 0%;
-  right: 15%;
+  right: 10%;
   font-family: 'VT323', monospace;
   font-size: 16px;
   background-color: #dfdfdf;
@@ -177,4 +178,19 @@ button {
 button:hover {
   background-color: #bdbdbd;
   box-shadow: inset 2px 2px 0px #888;
+}
+
+
+@media (max-width: 768px) {
+  .containerTodo {
+    padding: 10px;
+  }
+
+  .viewFullTodoBtn {
+    right: 15%;
+  }
+
+  .container{ 
+    max-width: 200px;
+  }
 }
