@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Time Tracker** is a web application designed to help you log activities and goals, and keep track of the time spent on them. It also features a to-do list to manage your tasks efficiently.
+**Time Tracker** is a 90's themed mobile first web application designed to help you log activities and goals, and keep track of the time spent on them. It also features a to-do list to manage your tasks efficiently.
 
 ## Features
 
@@ -43,6 +43,10 @@ Running the Application and start the development server:
   ```npm run dev```
 
 Open your browser and visit http://localhost:3001 to see the application in action.
+
+### Live Application
+
+https://timetracker2-zcfn.onrender.com/
 
 ### Contributing
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
